@@ -15,19 +15,18 @@ const mainBenefitCats = ['recommend','main','half'];
 const MENU = [
   {cat:'recommend', best:true, img:'images/half-oven.jpg', n:{ko:'화덕 반반메뉴',vi:'Set 2 món đút lò',en:'Oven Half & Half Platter',zh:'烤炉双拼'}, alt:{ko:'족발·보쌈·화덕족발·화덕보쌈·매운족발·냉채족발·매운보쌈 중 2가지 선택',vi:'Chọn 2 món: chân giò, ba chỉ, chân giò đút lò, ba chỉ đút lò, chân giò cay, chân giò sốt mù tạt, ba chỉ cay',en:'Choose 2: jokbal, bossam, oven jokbal, oven bossam, spicy jokbal, cold jokbal, spicy bossam',zh:'猪蹄、菜包肉、烤炉猪蹄、烤炉五花肉、辣猪蹄、凉拌猪蹄、辣五花肉中任选2种'}, prices:[['m',tax8(880000)],['l',tax8(980000)]], people:{ko:'중 2~3인 / 대 3~4인',vi:'Vừa 2~3 người / Lớn 3~4 người',en:'M 2–3 people / L 3–4 people',zh:'中 2~3人 / 大 3~4人'}},
 
-  {cat:'main', img:'images/whole-oven-jokbal.jpg', best:true, n:{ko:'화덕통구이족발',vi:'Chân giò nguyên cái đút lò',en:'Whole Oven-Roasted Jokbal',zh:'整只烤炉猪蹄'}, alt:{ko:'프리미엄 앞다리',vi:'Chân giò trước cao cấp',en:'Premium fore-leg',zh:'优质前腿'}, prices:[['single',tax8(980000)]], people:{ko:'3~4인 추천',vi:'Gợi ý 3~4 người',en:'Recommended for 3–4',zh:'建议3~4人'}},
-  {cat:'main', img:'images/mini-oven-jokbal.jpg', n:{ko:'화덕미니족',vi:'Chân giò mini đút lò',en:'Oven Mini Jokbal',zh:'烤炉迷你猪蹄'}, prices:[['single',388800]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
-  {cat:'main', img:'images/mini-fire-jokbal.jpg', spicy:true, n:{ko:'미니불족',vi:'Chân giò mini cay',en:'Spicy Mini Jokbal',zh:'迷你辣猪蹄'}, prices:[['single',453600]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
-  {cat:'main', img:'images/jokbal.jpg', n:{ko:'족발',vi:'Chân giò hầm',en:'Braised Jokbal',zh:'酱猪蹄'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
-  {cat:'main', img:'images/bossam.jpg', n:{ko:'보쌈',vi:'Thịt ba chỉ hầm',en:'Bossam',zh:'菜包肉'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/oven-jokbal.jpg', n:{ko:'화덕족발',vi:'Chân giò đút lò',en:'Oven-Roasted Jokbal',zh:'烤炉猪蹄'}, prices:[['s',tax8(680000)],['m',tax8(780000)],['l',tax8(880000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
-  {cat:'main', img:'', n:{ko:'화덕보쌈',vi:'Ba chỉ đút lò',en:'Oven-Roasted Bossam',zh:'烤炉五花肉'}, prices:[['s',tax8(680000)],['m',tax8(780000)],['l',tax8(880000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
-  {cat:'main', img:'images/garlic-jokbal.jpg', n:{ko:'마늘족발',vi:'Chân giò tỏi',en:'Garlic Jokbal',zh:'蒜香猪蹄'}, prices:[['s',tax8(720000)],['m',tax8(820000)],['l',tax8(920000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+  {cat:'main', img:'images/bossam.jpg', n:{ko:'보쌈',vi:'Thịt ba chỉ hầm',en:'Bossam',zh:'菜包肉'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+  {cat:'main', img:'images/jokbal.jpg', n:{ko:'족발',vi:'Chân giò hầm',en:'Braised Jokbal',zh:'酱猪蹄'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/garlic-bossam.jpg', n:{ko:'마늘보쌈',vi:'Ba chỉ tỏi',en:'Garlic Bossam',zh:'蒜香五花肉'}, prices:[['s',tax8(720000)],['m',tax8(820000)],['l',tax8(920000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
-  {cat:'main', img:'images/spicy-oven-jokbal.jpg', spicy:true, n:{ko:'화덕불족',vi:'Chân giò cay đút lò',en:'Spicy Oven Jokbal',zh:'香辣烤猪蹄'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
-  {cat:'main', img:'', spicy:true, n:{ko:'매운보쌈',vi:'Ba chỉ cay',en:'Spicy Bossam',zh:'辣味五花肉'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+  {cat:'main', img:'images/garlic-jokbal.jpg', n:{ko:'마늘족발',vi:'Chân giò tỏi',en:'Garlic Jokbal',zh:'蒜香猪蹄'}, prices:[['s',tax8(720000)],['m',tax8(820000)],['l',tax8(920000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/cheese-fire-jokbal.jpg', spicy:true, n:{ko:'화덕치즈불족',vi:'Chân giò cay phô mai đút lò',en:'Oven Cheese Fire Jokbal',zh:'芝士辣烤猪蹄'}, prices:[['s',tax8(750000)],['m',tax8(850000)],['l',tax8(950000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/cold-jokbal.jpg', n:{ko:'냉채족발',vi:'Chân giò sốt mù tạt',en:'Cold Jokbal',zh:'芥末凉拌猪蹄'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+  {cat:'main', img:'images/mini-oven-jokbal.jpg', n:{ko:'화덕미니족',vi:'Chân giò mini đút lò',en:'Oven Mini Jokbal',zh:'烤炉迷你猪蹄'}, prices:[['single',388800]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
+  {cat:'main', img:'images/mini-fire-jokbal.jpg', spicy:true, n:{ko:'미니불족',vi:'Chân giò mini cay',en:'Spicy Mini Jokbal',zh:'迷你辣猪蹄'}, prices:[['single',453600]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
+  {cat:'main', img:'images/whole-oven-jokbal.jpg', best:true, n:{ko:'화덕통구이족발',vi:'Chân giò nguyên cái đút lò',en:'Whole Oven-Roasted Jokbal',zh:'整只烤炉猪蹄'}, alt:{ko:'프리미엄 앞다리',vi:'Chân giò trước cao cấp',en:'Premium fore-leg',zh:'优质前腿'}, prices:[['single',tax8(980000)]], people:{ko:'3~4인 추천',vi:'Gợi ý 3~4 người',en:'Recommended for 3–4',zh:'建议3~4人'}},
+  {cat:'main', img:'', n:{ko:'화덕보쌈',vi:'Ba chỉ đút lò',en:'Oven-Roasted Bossam',zh:'烤炉五花肉'}, prices:[['s',tax8(680000)],['m',tax8(780000)],['l',tax8(880000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+  {cat:'main', img:'', spicy:true, n:{ko:'매운보쌈',vi:'Ba chỉ cay',en:'Spicy Bossam',zh:'辣味五花肉'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
 
 
   {cat:'side', img:'images/noodle-platter.jpg', n:{ko:'쟁반국수',vi:'Mỳ khay',en:'Noodle Platter',zh:'拌面拼盘'}, prices:[['single',tax8(200000)]]},
@@ -102,23 +101,28 @@ function card(item){
   const benefit = mainBenefitCats.includes(item.cat) ? `<div class="detail-block"><div class="detail-title">🍽 ${t('hall')}</div><ul><li>${t('hallBenefit')}</li></ul></div><div class="detail-block"><div class="detail-title">🛵 ${t('takeaway')}</div><ul><li>${t('takeBenefit')}</li></ul></div>` : '';
   const people = item.people ? `<div class="detail-block"><div class="detail-title">👥 ${t('people')}</div><p>${item.people[lang] || item.people.ko}</p></div>` : '';
   const desc = alt ? `<p class="desc">${alt}</p>` : '';
-  const photoHtml = item.img
-    ? `<img src="${item.img}" alt="${item.n[lang] || item.n.ko}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="placeholder" style="display:none">${t('photoReady')}</div>`
-    : `<div class="placeholder" style="display:grid">${t('photoReady')}</div>`;
+  const badgeHtml = `${item.best?'<span class="badge best">🏆 BEST</span>':''}${item.spicy?'<span class="badge spicy">🌶</span>':''}`;
+  const photoWrap = item.img ? `
+    <div class="photo-wrap" role="button" tabindex="0" aria-label="open photo">
+      <img src="${item.img}" alt="${item.n[lang] || item.n.ko}" loading="lazy" onerror="this.closest('.photo-wrap').remove();this.closest('.card')?.classList.add('text-only')">
+      <div class="badges">${badgeHtml}</div>
+    </div>` : '';
+  if(!item.img) el.classList.add('text-only');
   el.innerHTML = `
-    <div class="photo-wrap ${item.img ? '' : 'no-image'}" role="button" tabindex="0" aria-label="open photo">
-      ${photoHtml}
-      <div class="badges">${item.best?'<span class="badge best">🏆 BEST</span>':''}${item.spicy?'<span class="badge spicy">🌶</span>':''}</div>
-    </div>
+    ${photoWrap}
     <div class="body">
+      ${!item.img && badgeHtml ? `<div class="inline-badges">${badgeHtml}</div>` : ''}
       <div class="name-row"><div><div class="name">${item.n[lang] || item.n.ko}</div>${alt?`<div class="subname">${alt}</div>`:''}</div></div>
       <div class="price-list">${prices}</div>
       <button class="toggle" type="button">▼ ${t('detail')}</button>
       <div class="detail">${benefit}${people}${desc}</div>
     </div>`;
   el.querySelector('.toggle').onclick = () => toggleCard(el, id);
-  el.querySelector('.photo-wrap').onclick = () => { if(item.img) openPhoto(item); };
-  el.querySelector('.photo-wrap').onkeydown = e => { if(e.key === 'Enter' && item.img) openPhoto(item); };
+  const photo = el.querySelector('.photo-wrap');
+  if(photo){
+    photo.onclick = () => openPhoto(item);
+    photo.onkeydown = e => { if(e.key === 'Enter') openPhoto(item); };
+  }
   return el;
 }
 function toggleCard(el,id){

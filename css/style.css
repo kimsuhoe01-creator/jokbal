@@ -19,3 +19,12 @@ button,a{font:inherit;color:inherit}a{text-decoration:none}button{border:0;backg
 .card.open{grid-column:1/-1}.card.open .photo-wrap{aspect-ratio:16/9}.card.featured{grid-column:1/-1;border-radius:24px;background:linear-gradient(180deg,#34251a,#201610);border-color:rgba(243,207,141,.46);box-shadow:0 18px 44px rgba(0,0,0,.5)}.card.featured .photo-wrap{aspect-ratio:16/9}.card.featured .body{padding:15px 15px 16px}.card.featured .name{font-size:1.22rem}.card.featured .subname{font-size:.8rem;-webkit-line-clamp:3}.card.featured .price-line{font-size:.95rem;padding-top:6px}.card.featured .toggle{font-size:.88rem;padding:11px 6px}.card.featured .badge{font-size:.72rem;padding:6px 10px}.card.featured.open .photo-wrap{aspect-ratio:16/9}
 .footer{border-top:1px solid var(--line);padding:24px 14px 38px;text-align:center;color:var(--muted);font-size:.78rem}.footer strong{display:block;color:var(--gold2);font-size:.95rem;margin-bottom:4px}.modal{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.94);display:grid;place-items:center;padding:18px}.modal img{max-width:100%;max-height:82svh;border-radius:12px;object-fit:contain}.modal-close{position:fixed;right:14px;top:10px;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.12);font-size:32px;line-height:1}.modal-caption{position:fixed;left:16px;right:16px;bottom:18px;text-align:center;color:var(--text);font-weight:900}.to-top{position:fixed;right:14px;bottom:18px;z-index:30;width:44px;height:44px;border-radius:999px;background:var(--gold);color:#20140d;font-weight:900;box-shadow:var(--shadow)}
 @media (min-width:560px){.app{border-left:1px solid var(--line);border-right:1px solid var(--line)}}@media (max-width:360px){.card-grid{gap:8px}.menu{padding-left:9px;padding-right:9px}.price-line{font-size:.72rem}.name{font-size:.86rem}.card.featured .name{font-size:1.1rem}}
+.card.text-only{background:linear-gradient(180deg,rgba(50,39,31,.78),rgba(31,24,19,.86));border-style:solid}
+.card.text-only .body{padding:14px 12px 13px;min-height:136px;display:flex;flex-direction:column}
+.card.text-only .name{font-size:1rem}
+.card.text-only .price-list{margin-top:10px}
+.card.text-only .toggle{margin-top:auto}
+.inline-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.inline-badges .badge{position:static;display:inline-flex;align-items:center;width:max-content}
+.card.text-only.open{grid-column:1/-1}
+.card.text-only.open .body{min-height:0}
