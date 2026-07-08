@@ -67,10 +67,10 @@ let lang = localStorage.getItem('jokbal_lang') || '';
 let openId = null;
 const CAT_ICONS = {recommend:'🔥', main:'🥩', solo:'👤', side:'🥢', meal:'🍚', drink:'🍺'};
 const UI = {
-  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문'},
-  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm'},
-  en:{addCart:'Add to cart', cart:'Cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more'},
-  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐'}
+  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문', added:'✓ 장바구니에 담았습니다'},
+  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', added:'✓ Đã thêm vào giỏ'},
+  en:{addCart:'Add to cart', cart:'Cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', added:'✓ Added to cart'},
+  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', added:'✓ 已加入购物车'}
 };const SIZE_LABELS = {
   single:{ko:'단품',vi:'Một phần',en:'Single',zh:'单品'}, s:{ko:'소',vi:'Nhỏ',en:'S',zh:'小'}, m:{ko:'중',vi:'Vừa',en:'M',zh:'中'}, l:{ko:'대',vi:'Lớn',en:'L',zh:'大'},
   tiger:{ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường',en:'Regular soju',zh:'普通烧酒'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang',en:'Sunyang line',zh:'鲜洋系列'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt',en:'Choose soft drink',zh:'选择饮料'}
@@ -191,6 +191,7 @@ function initCartUI(){
   if(document.getElementById('cartFab')) return;
   document.body.insertAdjacentHTML('beforeend', `
     <button id="cartFab" class="cart-fab" type="button">🧾 <span>${ui('cart')}</span> <b id="cartCount">0</b></button>
+    <div id="cartToast" class="cart-toast hidden">${ui('added')}</div>
     <div id="orderSheet" class="sheet hidden" role="dialog" aria-modal="true">
       <div class="sheet-card order-card">
         <div class="sheet-head"><strong id="orderTitle"></strong><button id="orderClose" type="button">×</button></div>
@@ -308,10 +309,26 @@ function addPendingToCart(){
   const existing = cart.find(c => c.key === key);
   if(existing) existing.qty += pendingQty;
   else cart.push({key, n:pendingItem.n, size, price, qty:pendingQty, options});
-  closeOrderSheet(); renderCart(); updateCartButton(); openCart();
+  closeOrderSheet(); renderCart(); updateCartButton(); showCartToast();
 }
 function openCart(){ initCartUI(); renderCart(); $('#cartSheet').classList.remove('hidden'); }
 function closeCart(){ $('#cartSheet')?.classList.add('hidden'); }
+function showCartToast(){
+  const toast = $('#cartToast');
+  const fab = $('#cartFab');
+  if(toast){
+    toast.textContent = ui('added');
+    toast.classList.remove('hidden');
+    clearTimeout(showCartToast.timer);
+    showCartToast.timer = setTimeout(() => toast.classList.add('hidden'), 950);
+  }
+  if(fab){
+    fab.classList.remove('bump');
+    void fab.offsetWidth;
+    fab.classList.add('bump');
+  }
+}
+
 function updateCartButton(){
   const count = cart.reduce((s,i)=>s+i.qty,0);
   const fab = $('#cartFab'); if(!fab) return;

@@ -62,3 +62,18 @@ button,a{font:inherit;color:inherit}a{text-decoration:none}button{border:0;backg
 @media (max-width:360px){.sheet-actions.three{grid-template-columns:1fr}.staff-item{grid-template-columns:28px 1fr}.staff-qty{grid-column:2;display:flex;align-items:center;gap:8px;text-align:left}.staff-qty b{font-size:1.3rem}}
 .head-actions{display:flex;align-items:center;gap:8px}.sheet-head .staff-mini{width:auto;height:32px;border-radius:999px;padding:0 11px;font-size:.72rem;font-weight:950;background:rgba(212,164,95,.10);border:1px solid rgba(212,164,95,.28);color:var(--gold2);line-height:1}.cart-actions{grid-template-columns:.75fr 1.25fr}.cart-actions .primary{font-size:1.02rem;box-shadow:0 10px 24px rgba(212,164,95,.18)}
 @media (max-width:360px){.cart-actions{grid-template-columns:1fr}.head-actions{gap:5px}.sheet-head .staff-mini{padding:0 9px}}
+
+
+/* v13: faster tablet ordering UX */
+.name{font-size:1.12rem!important;line-height:1.28!important;font-weight:950!important;letter-spacing:-.035em!important}
+.subname{font-size:.78rem!important;line-height:1.32!important}
+.card.featured .name{font-size:1.42rem!important;line-height:1.25!important}
+.card.featured .subname{font-size:.9rem!important}
+.card.text-only .name{font-size:1.15rem!important;line-height:1.3!important}
+.add-cart{font-size:.95rem!important;padding:13px 8px!important}
+.card.featured .add-cart{font-size:1.08rem!important;padding:15px 10px!important}
+.cart-toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);z-index:95;background:rgba(22,19,16,.96);border:1px solid rgba(212,164,95,.5);color:#fff7ed;border-radius:999px;padding:12px 18px;font-weight:950;font-size:.92rem;box-shadow:0 12px 34px rgba(0,0,0,.48);white-space:nowrap;animation:toastIn .18s ease-out}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.cart-fab.bump{animation:cartBump .38s ease-out}
+@keyframes cartBump{0%{transform:translateX(-50%) scale(1)}35%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(1)}}
+@media (max-width:360px){.name{font-size:1.02rem!important}.card.featured .name{font-size:1.28rem!important}.cart-toast{font-size:.84rem;padding:10px 14px}}
