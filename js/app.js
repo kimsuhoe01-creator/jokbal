@@ -46,16 +46,18 @@ const MENU = [
   {cat:'side', img:'images/rice.jpg', n:{ko:'공기밥',vi:'Cơm trắng',en:'Steamed Rice',zh:'米饭'}, prices:[['single',tax8(20000)]]},
   {cat:'side', img:'images/sauce.jpg', n:{ko:'소스 (매운·마늘·냉채)',vi:'Nước chấm',en:'Sauce',zh:'酱料'}, prices:[['single',tax8(20000)]]},
 
+  {cat:'meal', featured:true, img:'images/gamjatang.webp', n:{ko:'감자탕',vi:'Lẩu xương heo',en:'Gamjatang',zh:'土豆脊骨汤'}, alt:{ko:'돼지뼈와 우거지를 진하게 끓인 한국식 탕',vi:'Lẩu xương heo kiểu Hàn, hầm đậm vị với rau cải',en:'Korean pork-bone stew with rich broth',zh:'韩式猪骨土豆汤，汤味浓郁'}, prices:[['single',194400]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
+
   {cat:'meal', img:'images/bone-soup.jpg', n:{ko:'뼈해장국',vi:'Canh xương hầm',en:'Pork-Bone Soup',zh:'骨头汤'}, alt:{ko:'매일 매장에서 직접 끓입니다',vi:'Hầm trực tiếp tại quán mỗi ngày',en:'Simmered in-house daily',zh:'每日店内现熬'}, prices:[['single',tax8(180000)]]},
   {cat:'meal', img:'images/budae.jpg', spicy:true, n:{ko:'부대찌개',vi:'Canh quân đội',en:'Budae Jjigae',zh:'部队火锅'}, prices:[['single',tax8(300000)]]},
   {cat:'meal', img:'images/kodari-naengmyeon.jpg', n:{ko:'코다리냉면',vi:'Miến lạnh trộn khô cá minh thái',en:'Kodari Cold Noodles',zh:'明太鱼干拌冷面'}, prices:[['single',tax8(180000)]]},
   {cat:'meal', img:'images/water-naengmyeon.jpg', n:{ko:'물냉면',vi:'Miến lạnh nước',en:'Cold Noodles in Broth',zh:'水冷面'}, prices:[['single',tax8(150000)]]},
   {cat:'meal', img:'images/spicy-naengmyeon.jpg', spicy:true, n:{ko:'비빔냉면',vi:'Miến lạnh trộn',en:'Spicy Mixed Cold Noodles',zh:'拌冷面'}, prices:[['single',tax8(150000)]]},
 
-  {cat:'drink', img:'images/beer.jpg', n:{ko:'맥주',vi:'Bia',en:'Beer',zh:'啤酒'}, prices:[['tiger',tax10(50000)]], options:[{id:'tiger',ko:'Tiger',vi:'Tiger',price:tax10(50000)}]},
-  {cat:'drink', img:'images/soju.jpg', n:{ko:'소주',vi:'Soju',en:'Soju',zh:'韩国烧酒'}, prices:[['soju_std',tax10(140000)],['soju_sunyang',220000]], options:[{id:'chamisul',ko:'참이슬',vi:'Chamisul',price:tax10(140000)},{id:'jinro',ko:'진로',vi:'Jinro',price:tax10(140000)},{id:'chumchurum',ko:'처음처럼',vi:'Chum Churum',price:tax10(140000)},{id:'saero',ko:'새로',vi:'Saero',price:tax10(140000)},{id:'sunyang',ko:'선양',vi:'Sunyang',price:220000},{id:'sunyang-oak',ko:'선양 오크',vi:'Sunyang Oak',price:220000}]},
+  {cat:'drink', img:'images/beer.jpg', n:{ko:'맥주',vi:'Bia',en:'Beer',zh:'啤酒'}, prices:[['tiger',tax10(50000)]], options:[{id:'tiger',ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger',price:tax10(50000)}]},
+  {cat:'drink', img:'images/soju.jpg', n:{ko:'소주',vi:'Soju',en:'Soju',zh:'韩国烧酒'}, prices:[['soju_std',tax10(140000)],['soju_sunyang',220000]], options:[{id:'chamisul',ko:'참이슬',vi:'Chamisul',en:'Chamisul',zh:'Chamisul',price:tax10(140000)},{id:'jinro',ko:'진로',vi:'Jinro',en:'Jinro',zh:'Jinro',price:tax10(140000)},{id:'chumchurum',ko:'처음처럼',vi:'Chum Churum',en:'Chum Churum',zh:'Chum Churum',price:tax10(140000)},{id:'saero',ko:'새로',vi:'Saero',en:'Saero',zh:'Saero',price:tax10(140000)},{id:'sunyang',ko:'선양',vi:'Sunyang',en:'Sunyang',zh:'Sunyang',price:220000},{id:'sunyang-oak',ko:'선양 오크',vi:'Sunyang Oak',en:'Sunyang Oak',zh:'Sunyang Oak',price:220000}]},
   {cat:'drink', img:'images/golden-blue-sapphire.jpg', n:{ko:'골든블루 사피러스',vi:'Golden Blue Sapphire',en:'Golden Blue Sapphire',zh:'Golden Blue Sapphire'}, prices:[['single',1650000]]},
-  {cat:'drink', img:'images/soft-drink.jpg', n:{ko:'음료수',vi:'Nước ngọt',en:'Soft Drinks',zh:'饮料'}, prices:[['soft_all',tax10(30000)]], options:[{id:'coke',ko:'콜라',vi:'Coca',price:tax10(30000)},{id:'sprite',ko:'스프라이트',vi:'Sprite',price:tax10(30000)},{id:'fanta',ko:'환타',vi:'Fanta',price:tax10(30000)}]},
+  {cat:'drink', img:'images/soft-drink.jpg', n:{ko:'음료수',vi:'Nước ngọt',en:'Soft Drinks',zh:'饮料'}, prices:[['soft_all',tax10(30000)]], options:[{id:'coke',ko:'콜라',vi:'Coca',en:'Coke',zh:'可乐',price:tax10(30000)},{id:'sprite',ko:'스프라이트',vi:'Sprite',en:'Sprite',zh:'雪碧',price:tax10(30000)},{id:'fanta',ko:'환타',vi:'Fanta',en:'Fanta',zh:'芬达',price:tax10(30000)}]},
   {cat:'drink', img:'images/makgeolli.jpg', n:{ko:'막걸리',vi:'Rượu gạo Makgeolli',en:'Makgeolli',zh:'马格利米酒'}, prices:[['single',tax10(160000)]]},
   {cat:'drink', img:'images/chungha.jpg', n:{ko:'청하',vi:'Rượu Chung Ha',en:'Chungha',zh:'清河清酒'}, prices:[['single',tax10(200000)]]},
   {cat:'drink', img:'images/bokbunja.jpg', n:{ko:'복분자',vi:'Rượu quả mâm xôi',en:'Bokbunja',zh:'覆盆子酒'}, prices:[['single',tax10(300000)]]}
@@ -65,23 +67,21 @@ let lang = localStorage.getItem('jokbal_lang') || '';
 let openId = null;
 const CAT_ICONS = {recommend:'🔥', main:'🥩', solo:'👤', side:'🥢', meal:'🍚', drink:'🍺'};
 const UI = {
-  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'전체 비우기', total:'합계', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원 확인', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문'},
-  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa tất cả', total:'Tổng cộng', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên xác nhận', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm'},
-  en:{addCart:'Add to cart', cart:'Cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear all', total:'Total', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list'},
-  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工确认', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐'}
-};
-const SIZE_LABELS = {
-  single:{ko:'단품',vi:'Một phần'}, s:{ko:'소',vi:'Nhỏ'}, m:{ko:'중',vi:'Vừa'}, l:{ko:'대',vi:'Lớn'},
-  tiger:{ko:'Tiger',vi:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt'}
-};
-const HALF_CHOICES = [
-  {id:'jokbal', ko:'족발', vi:'Chân giò hầm'},
-  {id:'bossam', ko:'보쌈', vi:'Thịt ba chỉ hầm'},
-  {id:'oven-jokbal', ko:'화덕족발', vi:'Chân giò đút lò'},
-  {id:'oven-bossam', ko:'화덕보쌈', vi:'Ba chỉ đút lò'},
-  {id:'spicy-jokbal', ko:'매운족발', vi:'Chân giò cay'},
-  {id:'cold-jokbal', ko:'냉채족발', vi:'Chân giò sốt mù tạt'},
-  {id:'spicy-bossam', ko:'매운보쌈', vi:'Ba chỉ cay'}
+  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문'},
+  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm'},
+  en:{addCart:'Add to cart', cart:'Cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more'},
+  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐'}
+};const SIZE_LABELS = {
+  single:{ko:'단품',vi:'Một phần',en:'Single',zh:'单品'}, s:{ko:'소',vi:'Nhỏ',en:'S',zh:'小'}, m:{ko:'중',vi:'Vừa',en:'M',zh:'中'}, l:{ko:'대',vi:'Lớn',en:'L',zh:'大'},
+  tiger:{ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường',en:'Regular soju',zh:'普通烧酒'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang',en:'Sunyang line',zh:'鲜洋系列'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt',en:'Choose soft drink',zh:'选择饮料'}
+};const HALF_CHOICES = [
+  {id:'jokbal', ko:'족발', vi:'Chân giò hầm', en:'Braised Jokbal', zh:'酱猪蹄'},
+  {id:'bossam', ko:'보쌈', vi:'Thịt ba chỉ hầm', en:'Bossam', zh:'菜包肉'},
+  {id:'oven-jokbal', ko:'화덕족발', vi:'Chân giò đút lò', en:'Oven Jokbal', zh:'烤炉猪蹄'},
+  {id:'oven-bossam', ko:'화덕보쌈', vi:'Ba chỉ đút lò', en:'Oven Bossam', zh:'烤炉五花肉'},
+  {id:'spicy-jokbal', ko:'매운족발', vi:'Chân giò cay', en:'Spicy Jokbal', zh:'辣猪蹄'},
+  {id:'cold-jokbal', ko:'냉채족발', vi:'Chân giò sốt mù tạt', en:'Cold Jokbal', zh:'芥末凉拌猪蹄'},
+  {id:'spicy-bossam', ko:'매운보쌈', vi:'Ba chỉ cay', en:'Spicy Bossam', zh:'辣味五花肉'}
 ];
 const $ = s => document.querySelector(s);
 const menuEl = $('#menu');
@@ -129,7 +129,7 @@ function renderMenu(){
 }
 function card(item){
   const id = item.cat + '-' + item.n.ko.replace(/[^가-힣a-zA-Z0-9]/g,'');
-  const el = document.createElement('article'); el.className = 'card' + (item.cat === 'recommend' ? ' featured' : ''); el.dataset.id = id;
+  const el = document.createElement('article'); el.className = 'card' + ((item.cat === 'recommend' || item.featured) ? ' featured' : ''); el.dataset.id = id;
   const alt = item.alt?.[lang] || (lang !== 'ko' ? item.n.ko : '');
   const prices = item.prices.map(([size, price]) => `<div class="price-line ${size==='single'?'single':''}"><span>${t(size)}</span><strong>${fmt(price)}</strong></div>`).join('');
   const benefit = mainBenefitCats.includes(item.cat) ? `<div class="detail-block"><div class="detail-title">🍽 ${t('hall')}</div><ul><li>${t('hallBenefit')}</li></ul></div><div class="detail-block"><div class="detail-title">🛵 ${t('takeaway')}</div><ul><li>${t('takeBenefit')}</li></ul></div>` : '';
@@ -203,11 +203,11 @@ function initCartUI(){
     </div>
     <div id="cartSheet" class="sheet hidden" role="dialog" aria-modal="true">
       <div class="sheet-card cart-card">
-        <div class="sheet-head"><strong>🧾 ${ui('orderList')}</strong><button id="cartClose" type="button">×</button></div>
-        <div class="staff-note">${ui('staffNote')}</div>
+        <div class="sheet-head"><strong>🧾 ${ui('orderList')}</strong><div class="head-actions"><button id="staffConfirm" class="staff-mini" type="button">${ui('staffConfirm')}</button><button id="cartClose" type="button">×</button></div></div>
+        <div class="staff-note">${ui('cartNote')}</div>
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-total"><span>${ui('total')}</span><strong id="cartTotal">0₫</strong></div>
-        <div class="sheet-actions three"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="ghost">${ui('addOrder')}</button><button id="staffConfirm" type="button" class="primary">✅ ${ui('staffConfirm')}</button></div>
+        <div class="sheet-actions cart-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="primary">➕ ${ui('addOrder')}</button></div>
       </div>
     </div>
     <div id="staffSheet" class="sheet hidden" role="dialog" aria-modal="true">
@@ -236,13 +236,14 @@ function initCartUI(){
   $('#staffDone').onclick = () => { closeStaffConfirm(); closeCart(); };
   $('#staffSheet').addEventListener('click', e => { if(e.target.id === 'staffSheet') closeStaffConfirm(); });
 }
-function cartKoVi(item){ return `${item.n.ko} / ${item.n.vi}`; }
+function localName(o){ return o?.[lang] || o?.en || o?.vi || o?.ko || ''; }
+function koViName(o){ return `${o?.ko || ''} / ${o?.vi || ''}`; }
+function sizeLocal(size){ return SIZE_LABELS[size]?.[lang] || SIZE_LABELS[size]?.en || SIZE_LABELS[size]?.ko || size; }
 function sizeKoVi(size){ return SIZE_LABELS[size] ? `${SIZE_LABELS[size].ko} / ${SIZE_LABELS[size].vi}` : size; }
-function optionKoVi(o){ return `${o.ko} / ${o.vi}`; }
 function openOrderSheet(item){
   initCartUI(); pendingItem = item; pendingSizeIndex = 0; pendingQty = 1; pendingHalf = []; pendingOptionIndex = 0;
   $('#orderTitle').textContent = ui('selectOption');
-  $('#orderName').innerHTML = `<strong>${cartKoVi(item)}</strong>`;
+  $('#orderName').innerHTML = `<strong>${localName(item.n)}</strong>`;
   renderSizeChooser(item); renderHalfChooser(item); renderOptionChooser(item); renderOrderQty();
   $('#orderSheet').classList.remove('hidden');
 }
@@ -253,7 +254,7 @@ function renderSizeChooser(item){
   box.innerHTML = `<div class="choose-title">${ui('selectSize')}</div>`;
   item.prices.forEach(([size, price], idx) => {
     const b = document.createElement('button'); b.type='button'; b.className = idx===pendingSizeIndex ? 'selected' : '';
-    b.innerHTML = `<span>${sizeKoVi(size)}</span><strong>${fmt(price)}</strong>`;
+    b.innerHTML = `<span>${sizeLocal(size)}</span><strong>${fmt(price)}</strong>`;
     b.onclick = () => { pendingSizeIndex = idx; renderSizeChooser(item); };
     box.appendChild(b);
   });
@@ -264,7 +265,7 @@ function renderHalfChooser(item){
   box.innerHTML = `<div class="choose-title">${ui('selectHalf')}</div>`;
   HALF_CHOICES.forEach(choice => {
     const b = document.createElement('button'); b.type='button'; b.className = pendingHalf.includes(choice.id) ? 'selected' : '';
-    b.textContent = optionKoVi(choice);
+    b.textContent = localName(choice);
     b.onclick = () => {
       if(pendingHalf.includes(choice.id)) pendingHalf = pendingHalf.filter(x => x !== choice.id);
       else { if(pendingHalf.length >= 2) pendingHalf.shift(); pendingHalf.push(choice.id); }
@@ -286,7 +287,7 @@ function renderOptionChooser(item){
   box.innerHTML = `<div class="choose-title">${ui('option')}</div>`;
   item.options.forEach((opt, idx) => {
     const b = document.createElement('button'); b.type='button'; b.className = idx===pendingOptionIndex ? 'selected' : '';
-    b.innerHTML = `<span>${optionKoVi(opt)}</span><strong>${fmt(opt.price)}</strong>`;
+    b.innerHTML = `<span>${localName(opt)}</span><strong>${fmt(opt.price)}</strong>`;
     b.onclick = () => { pendingOptionIndex = idx; renderOptionChooser(item); };
     box.appendChild(b);
   });
@@ -306,7 +307,7 @@ function addPendingToCart(){
   const key = [pendingItem.n.ko, size, ...options.map(o=>o.id)].join('|');
   const existing = cart.find(c => c.key === key);
   if(existing) existing.qty += pendingQty;
-  else cart.push({key, ko:pendingItem.n.ko, vi:pendingItem.n.vi, size, price, qty:pendingQty, options});
+  else cart.push({key, n:pendingItem.n, size, price, qty:pendingQty, options});
   closeOrderSheet(); renderCart(); updateCartButton(); openCart();
 }
 function openCart(){ initCartUI(); renderCart(); $('#cartSheet').classList.remove('hidden'); }
@@ -322,10 +323,10 @@ function renderCart(){
   if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#cartTotal').textContent = fmt(0); return; }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
-    const optionLines = it.options?.length ? `<div class="cart-option-list">${it.options.map(o => `<div>- ${optionKoVi(o)}</div>`).join('')}</div>` : '';
-    const sizeLine = it.size && it.size !== 'single' ? `<span>${ui('size')}: ${sizeKoVi(it.size)}</span>` : '';
+    const optionLines = it.options?.length ? `<div class="cart-option-list">${it.options.map(o => `<div>- ${localName(o)}</div>`).join('')}</div>` : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<span>${ui('size')}: ${sizeLocal(it.size)}</span>` : '';
     const row = document.createElement('div'); row.className = 'cart-item';
-    row.innerHTML = `<div class="cart-item-main"><strong>${it.ko} / ${it.vi}</strong>${optionLines}${sizeLine}<span class="cart-qty-text">${ui('qtyLabel')}: ${it.qty}</span><em>${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</em></div><div class="cart-qty"><button type="button" data-act="minus">−</button><b>${it.qty}</b><button type="button" data-act="plus">＋</button></div>`;
+    row.innerHTML = `<div class="cart-item-main"><strong>${localName(it.n)}</strong>${optionLines}${sizeLine}<span class="cart-qty-text">${ui('qtyLabel')}: ${it.qty}</span><em>${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</em></div><div class="cart-qty"><button type="button" data-act="minus">−</button><b>${it.qty}</b><button type="button" data-act="plus">＋</button></div>`;
     row.querySelector('[data-act="minus"]').onclick = () => { it.qty--; if(it.qty <= 0) cart.splice(idx,1); renderCart(); updateCartButton(); };
     row.querySelector('[data-act="plus"]').onclick = () => { it.qty++; renderCart(); updateCartButton(); };
     box.appendChild(row);
@@ -344,10 +345,10 @@ function renderStaffConfirm(){
   if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#staffTotal').textContent = fmt(0); return; }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
-    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div>- ${optionKoVi(o)}</div>`).join('')}</div>` : '';
-    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">${ui('size')}: ${sizeKoVi(it.size)}</div>` : '';
+    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div>- ${koViName(o)}</div>`).join('')}</div>` : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">사이즈 / Size: ${sizeKoVi(it.size)}</div>` : '';
     const row = document.createElement('div'); row.className = 'staff-item';
-    row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${it.ko} / ${it.vi}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">${ui('qtyLabel')}<b>${it.qty}</b></div>`;
+    row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${koViName(it.n)}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">수량<b>${it.qty}</b></div>`;
     box.appendChild(row);
   });
   $('#staffTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
