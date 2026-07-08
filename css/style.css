@@ -44,3 +44,19 @@ button,a{font:inherit;color:inherit}a{text-decoration:none}button{border:0;backg
 .card.text-only .add-cart{margin-top:12px!important}
 .half-chooser button{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left}
 .half-chooser button strong{white-space:nowrap;color:#fff7ed}
+
+/* v9 staff confirmation + clearer POS entry */
+.sheet-actions.three{grid-template-columns:.8fr 1fr 1.25fr}
+.cart-option-list{display:block;color:#fff7ed;font-size:.82rem;margin-top:6px;line-height:1.45;font-weight:850}
+.cart-qty-text{color:var(--gold2)!important;font-weight:950!important;font-size:.82rem!important;margin-top:5px!important}
+.staff-card{max-height:92svh}
+.staff-items{display:grid;gap:10px;margin:12px 0}
+.staff-item{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:12px}
+.staff-no{width:32px;height:32px;border-radius:999px;background:var(--gold);color:#20140d;display:grid;place-items:center;font-weight:950}
+.staff-main strong{display:block;color:#fff7ed;font-size:.98rem;line-height:1.35}
+.staff-options{margin-top:6px;color:#fff7ed;font-weight:900;font-size:.9rem;line-height:1.5}
+.staff-size{margin-top:5px;color:var(--muted);font-size:.82rem;font-weight:850}
+.staff-price{margin-top:6px;color:var(--gold2);font-weight:950;font-size:.88rem}
+.staff-qty{min-width:58px;text-align:center;color:var(--muted);font-size:.74rem;font-weight:900}
+.staff-qty b{display:block;color:#fff7ed;font-size:1.55rem;line-height:1.1;margin-top:2px}
+@media (max-width:360px){.sheet-actions.three{grid-template-columns:1fr}.staff-item{grid-template-columns:28px 1fr}.staff-qty{grid-column:2;display:flex;align-items:center;gap:8px;text-align:left}.staff-qty b{font-size:1.3rem}}

@@ -65,10 +65,10 @@ let lang = localStorage.getItem('jokbal_lang') || '';
 let openId = null;
 const CAT_ICONS = {recommend:'🔥', main:'🥩', solo:'👤', side:'🥢', meal:'🍚', drink:'🍺'};
 const UI = {
-  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'전체 비우기', total:'합계', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인'},
-  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa tất cả', total:'Tổng cộng', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món'},
+  ko:{addCart:'장바구니 담기', cart:'장바구니', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'전체 비우기', total:'합계', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원 확인', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문'},
+  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa tất cả', total:'Tổng cộng', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên xác nhận', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm'},
   en:{addCart:'Add to cart', cart:'Cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear all', total:'Total', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list'},
-  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单'}
+  zh:{addCart:'加入购物车', cart:'购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工确认', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐'}
 };
 const SIZE_LABELS = {
   single:{ko:'단품',vi:'Một phần'}, s:{ko:'소',vi:'Nhỏ'}, m:{ko:'중',vi:'Vừa'}, l:{ko:'대',vi:'Lớn'},
@@ -207,7 +207,16 @@ function initCartUI(){
         <div class="staff-note">${ui('staffNote')}</div>
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-total"><span>${ui('total')}</span><strong id="cartTotal">0₫</strong></div>
-        <div class="sheet-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="primary">${ui('close')}</button></div>
+        <div class="sheet-actions three"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="ghost">${ui('addOrder')}</button><button id="staffConfirm" type="button" class="primary">✅ ${ui('staffConfirm')}</button></div>
+      </div>
+    </div>
+    <div id="staffSheet" class="sheet hidden" role="dialog" aria-modal="true">
+      <div class="sheet-card staff-card">
+        <div class="sheet-head"><strong>✅ ${ui('staffTitle')}</strong><button id="staffClose" type="button">×</button></div>
+        <div class="staff-note">${ui('staffNote')}</div>
+        <div id="staffItems" class="staff-items"></div>
+        <div class="cart-total"><span>${ui('total')}</span><strong id="staffTotal">0₫</strong></div>
+        <div class="sheet-actions"><button id="staffBack" type="button" class="ghost">${ui('editOrder')}</button><button id="staffDone" type="button" class="primary">${ui('addOrder')}</button></div>
       </div>
     </div>`);
   $('#cartFab').onclick = openCart;
@@ -221,6 +230,11 @@ function initCartUI(){
   $('#cartDone').onclick = closeCart;
   $('#cartSheet').addEventListener('click', e => { if(e.target.id === 'cartSheet') closeCart(); });
   $('#cartClear').onclick = () => { cart = []; renderCart(); updateCartButton(); };
+  $('#staffConfirm').onclick = openStaffConfirm;
+  $('#staffClose').onclick = closeStaffConfirm;
+  $('#staffBack').onclick = () => { closeStaffConfirm(); openCart(); };
+  $('#staffDone').onclick = () => { closeStaffConfirm(); closeCart(); };
+  $('#staffSheet').addEventListener('click', e => { if(e.target.id === 'staffSheet') closeStaffConfirm(); });
 }
 function cartKoVi(item){ return `${item.n.ko} / ${item.n.vi}`; }
 function sizeKoVi(size){ return SIZE_LABELS[size] ? `${SIZE_LABELS[size].ko} / ${SIZE_LABELS[size].vi}` : size; }
@@ -308,14 +322,35 @@ function renderCart(){
   if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#cartTotal').textContent = fmt(0); return; }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
-    const opt = it.options?.length ? `<div class="cart-option"><b>${ui('option')}:</b> ${it.options.map(optionKoVi).join(' + ')}</div>` : '';
+    const optionLines = it.options?.length ? `<div class="cart-option-list">${it.options.map(o => `<div>- ${optionKoVi(o)}</div>`).join('')}</div>` : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<span>${ui('size')}: ${sizeKoVi(it.size)}</span>` : '';
     const row = document.createElement('div'); row.className = 'cart-item';
-    row.innerHTML = `<div class="cart-item-main"><strong>${it.ko} / ${it.vi}</strong><span>${ui('size')}: ${sizeKoVi(it.size)}</span>${opt}<em>${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</em></div><div class="cart-qty"><button type="button" data-act="minus">−</button><b>${it.qty}</b><button type="button" data-act="plus">＋</button></div>`;
+    row.innerHTML = `<div class="cart-item-main"><strong>${it.ko} / ${it.vi}</strong>${optionLines}${sizeLine}<span class="cart-qty-text">${ui('qtyLabel')}: ${it.qty}</span><em>${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</em></div><div class="cart-qty"><button type="button" data-act="minus">−</button><b>${it.qty}</b><button type="button" data-act="plus">＋</button></div>`;
     row.querySelector('[data-act="minus"]').onclick = () => { it.qty--; if(it.qty <= 0) cart.splice(idx,1); renderCart(); updateCartButton(); };
     row.querySelector('[data-act="plus"]').onclick = () => { it.qty++; renderCart(); updateCartButton(); };
     box.appendChild(row);
   });
   $('#cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+function openStaffConfirm(){
+  initCartUI();
+  renderStaffConfirm();
+  closeCart();
+  $('#staffSheet').classList.remove('hidden');
+}
+function closeStaffConfirm(){ $('#staffSheet')?.classList.add('hidden'); }
+function renderStaffConfirm(){
+  const box = $('#staffItems'); if(!box) return;
+  if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#staffTotal').textContent = fmt(0); return; }
+  box.innerHTML = '';
+  cart.forEach((it, idx) => {
+    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div>- ${optionKoVi(o)}</div>`).join('')}</div>` : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">${ui('size')}: ${sizeKoVi(it.size)}</div>` : '';
+    const row = document.createElement('div'); row.className = 'staff-item';
+    row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${it.ko} / ${it.vi}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">${ui('qtyLabel')}<b>${it.qty}</b></div>`;
+    box.appendChild(row);
+  });
+  $('#staffTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
 }
 
 showLang();
