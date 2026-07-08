@@ -46,7 +46,7 @@ const MENU = [
   {cat:'side', img:'images/rice.jpg', n:{ko:'공기밥',vi:'Cơm trắng',en:'Steamed Rice',zh:'米饭'}, prices:[['single',tax8(20000)]]},
   {cat:'side', img:'images/sauce.jpg', n:{ko:'소스 (매운·마늘·냉채)',vi:'Nước chấm',en:'Sauce',zh:'酱料'}, prices:[['single',tax8(20000)]]},
 
-  {cat:'meal', featured:true, img:'images/gamjatang.webp', n:{ko:'감자탕',vi:'Lẩu xương heo',en:'Gamjatang',zh:'土豆脊骨汤'}, alt:{ko:'돼지뼈와 우거지를 진하게 끓인 한국식 탕',vi:'Lẩu xương heo kiểu Hàn, hầm đậm vị với rau cải',en:'Korean pork-bone stew with rich broth',zh:'韩式猪骨土豆汤，汤味浓郁'}, prices:[['single',194400]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
+  {cat:'meal', featured:true, img:'images/gamjatang.webp', n:{ko:'감자탕',vi:'Lẩu xương heo',en:'Gamjatang',zh:'土豆脊骨汤'}, alt:{ko:'직접 말린 우거지로 시원하고 구수한 감자탕! 볶음밥까지!',vi:'Lẩu truyền thống Hàn Quốc được nấu từ xương sống và xương cổ heo.',en:'A traditional Korean hot pot made with pork backbone and pork neck bones.',zh:'使用猪脊骨和猪颈骨熬煮的韩国传统火锅料理。'}, prices:[['single',486000]], people:{ko:'2~3인 추천',vi:'Gợi ý 2~3 người',en:'Recommended for 2–3',zh:'建议2~3人'}},
 
   {cat:'meal', img:'images/bone-soup.jpg', n:{ko:'뼈해장국',vi:'Canh xương hầm',en:'Pork-Bone Soup',zh:'骨头汤'}, alt:{ko:'매일 매장에서 직접 끓입니다',vi:'Hầm trực tiếp tại quán mỗi ngày',en:'Simmered in-house daily',zh:'每日店内现熬'}, prices:[['single',tax8(180000)]]},
   {cat:'meal', img:'images/budae.jpg', spicy:true, n:{ko:'부대찌개',vi:'Canh quân đội',en:'Budae Jjigae',zh:'部队火锅'}, prices:[['single',tax8(300000)]]},
@@ -138,7 +138,7 @@ function card(item){
   const badgeHtml = `${item.best?'<span class="badge best">🏆 BEST</span>':''}${item.spicy?'<span class="badge spicy">🌶</span>':''}`;
   const photoWrap = item.img ? `
     <div class="photo-wrap" role="button" tabindex="0" aria-label="open photo">
-      <img src="${item.img}" alt="${item.n[lang] || item.n.ko}" loading="lazy" onerror="this.closest('.photo-wrap').remove();this.closest('.card')?.classList.add('text-only')">
+      <img src="${item.img}" alt="${item.n[lang] || item.n.ko}" loading="${(item.featured || item.cat === 'recommend') ? 'eager' : 'lazy'}" decoding="async" ${item.featured ? 'fetchpriority="high"' : ''} onerror="this.closest('.photo-wrap').remove();this.closest('.card')?.classList.add('text-only')">
       <div class="badges">${badgeHtml}</div>
     </div>` : '';
   if(!item.img) el.classList.add('text-only');
