@@ -9,12 +9,13 @@ const I18N = {
   zh:{storeName:'猪蹄新先生 北宁店',call:'电话订餐',delivery:'DeliveryK 外卖',priceNote:'价格单位为VND，与POS/小票价格一致。',detail:'查看详情',close:'收起',hall:'堂食',hallBenefit:'赠送拌面拼盘或戈贡佐拉披萨 + 海鲜嫩豆腐汤 + 蒸蛋',takeaway:'外卖 · 打包',takeBenefit:'赠送猪蹄炒饭 + 拌面',people:'建议人数',photoReady:'照片准备中',recommend:'推荐',main:'主菜',half:'双拼',solo:'单人餐',side:'配菜',meal:'饭 · 汤',drink:'酒水饮料',single:'价格',s:'小',m:'中',l:'大'}
 };
 
-const CATS = ['recommend','main','side','meal','drink'];
+const CATS = ['recommend','main','solo','side','meal','drink'];
 const mainBenefitCats = ['recommend','main','half'];
 
 const MENU = [
   {cat:'recommend', best:true, img:'images/half-oven.jpg', n:{ko:'화덕 반반메뉴',vi:'Set 2 món đút lò',en:'Oven Half & Half Platter',zh:'烤炉双拼'}, alt:{ko:'족발·보쌈·화덕족발·화덕보쌈·매운족발·냉채족발·매운보쌈 중 2가지 선택',vi:'Chọn 2 món: chân giò, ba chỉ, chân giò đút lò, ba chỉ đút lò, chân giò cay, chân giò sốt mù tạt, ba chỉ cay',en:'Choose 2: jokbal, bossam, oven jokbal, oven bossam, spicy jokbal, cold jokbal, spicy bossam',zh:'猪蹄、菜包肉、烤炉猪蹄、烤炉五花肉、辣猪蹄、凉拌猪蹄、辣五花肉中任选2种'}, prices:[['m',tax8(880000)],['l',tax8(980000)]], people:{ko:'중 2~3인 / 대 3~4인',vi:'Vừa 2~3 người / Lớn 3~4 người',en:'M 2–3 people / L 3–4 people',zh:'中 2~3人 / 大 3~4人'}},
 
+  {cat:'main', img:'images/whole-oven-jokbal.jpg', best:true, n:{ko:'화덕통구이족발',vi:'Chân giò nguyên cái đút lò',en:'Whole Oven-Roasted Jokbal',zh:'整只烤炉猪蹄'}, alt:{ko:'프리미엄 앞다리',vi:'Chân giò trước cao cấp',en:'Premium fore-leg',zh:'优质前腿'}, prices:[['single',tax8(980000)]], people:{ko:'3~4인 추천',vi:'Gợi ý 3~4 người',en:'Recommended for 3–4',zh:'建议3~4人'}},
   {cat:'main', img:'images/oven-jokbal.jpg', n:{ko:'화덕족발',vi:'Chân giò đút lò',en:'Oven-Roasted Jokbal',zh:'烤炉猪蹄'}, prices:[['s',tax8(680000)],['m',tax8(780000)],['l',tax8(880000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/bossam.jpg', n:{ko:'보쌈',vi:'Thịt ba chỉ hầm',en:'Bossam',zh:'菜包肉'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/jokbal.jpg', n:{ko:'족발',vi:'Chân giò hầm',en:'Braised Jokbal',zh:'酱猪蹄'}, prices:[['s',tax8(650000)],['m',tax8(750000)],['l',tax8(850000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
@@ -24,9 +25,15 @@ const MENU = [
   {cat:'main', img:'images/cold-jokbal.jpg', n:{ko:'냉채족발',vi:'Chân giò sốt mù tạt',en:'Cold Jokbal',zh:'芥末凉拌猪蹄'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'images/mini-oven-jokbal.jpg', n:{ko:'화덕미니족',vi:'Chân giò mini đút lò',en:'Oven Mini Jokbal',zh:'烤炉迷你猪蹄'}, prices:[['single',388800]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
   {cat:'main', img:'images/mini-fire-jokbal.jpg', spicy:true, n:{ko:'미니불족',vi:'Chân giò mini cay',en:'Spicy Mini Jokbal',zh:'迷你辣猪蹄'}, prices:[['single',453600]], people:{ko:'1~2인 추천',vi:'Gợi ý 1~2 người',en:'Recommended for 1–2',zh:'建议1~2人'}},
-  {cat:'main', img:'images/whole-oven-jokbal.jpg', best:true, n:{ko:'화덕통구이족발',vi:'Chân giò nguyên cái đút lò',en:'Whole Oven-Roasted Jokbal',zh:'整只烤炉猪蹄'}, alt:{ko:'프리미엄 앞다리',vi:'Chân giò trước cao cấp',en:'Premium fore-leg',zh:'优质前腿'}, prices:[['single',tax8(980000)]], people:{ko:'3~4인 추천',vi:'Gợi ý 3~4 người',en:'Recommended for 3–4',zh:'建议3~4人'}},
   {cat:'main', img:'', n:{ko:'화덕보쌈',vi:'Ba chỉ đút lò',en:'Oven-Roasted Bossam',zh:'烤炉五花肉'}, prices:[['s',tax8(680000)],['m',tax8(780000)],['l',tax8(880000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
   {cat:'main', img:'', spicy:true, n:{ko:'매운보쌈',vi:'Ba chỉ cay',en:'Spicy Bossam',zh:'辣味五花肉'}, prices:[['s',tax8(700000)],['m',tax8(800000)],['l',tax8(900000)]], people:{ko:'소 2인 / 중 2~3인 / 대 3~4인',vi:'Nhỏ 2 người / Vừa 2~3 / Lớn 3~4',en:'S 2 / M 2–3 / L 3–4',zh:'小2人 / 中2~3人 / 大3~4人'}},
+
+
+  {cat:'solo', img:'', n:{ko:'화덕족발 (1인)',vi:'Chân giò đút lò (1 người)',en:'Oven Jokbal (for 1)',zh:'烤炉猪蹄(单人)'}, prices:[['single',tax8(250000)]], people:{ko:'1인 추천',vi:'Gợi ý 1 người',en:'Recommended for 1',zh:'建议1人'}},
+  {cat:'solo', img:'', n:{ko:'화덕보쌈 (1인)',vi:'Ba chỉ đút lò (1 người)',en:'Oven Bossam (for 1)',zh:'烤炉五花肉(单人)'}, prices:[['single',tax8(250000)]], people:{ko:'1인 추천',vi:'Gợi ý 1 người',en:'Recommended for 1',zh:'建议1人'}},
+  {cat:'solo', img:'', spicy:true, n:{ko:'매운족발 (1인)',vi:'Chân giò cay đút lò (1 người)',en:'Spicy Jokbal (for 1)',zh:'辣烤猪蹄(单人)'}, prices:[['single',tax8(270000)]], people:{ko:'1인 추천',vi:'Gợi ý 1 người',en:'Recommended for 1',zh:'建议1人'}},
+  {cat:'solo', img:'', n:{ko:'냉채족발 (1인)',vi:'Chân giò sốt mù tạt (1 người)',en:'Cold Jokbal (for 1)',zh:'凉拌猪蹄(单人)'}, prices:[['single',tax8(270000)]], people:{ko:'1인 추천',vi:'Gợi ý 1 người',en:'Recommended for 1',zh:'建议1人'}},
+  {cat:'solo', img:'', spicy:true, n:{ko:'매운보쌈 (1인)',vi:'Ba chỉ cay đút lò (1 người)',en:'Spicy Bossam (for 1)',zh:'辣五花肉(单人)'}, prices:[['single',tax8(270000)]], people:{ko:'1인 추천',vi:'Gợi ý 1 người',en:'Recommended for 1',zh:'建议1人'}},
 
 
   {cat:'side', img:'images/noodle-platter.jpg', n:{ko:'쟁반국수',vi:'Mỳ khay',en:'Noodle Platter',zh:'拌面拼盘'}, prices:[['single',tax8(200000)]]},
