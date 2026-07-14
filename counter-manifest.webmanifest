@@ -7,7 +7,7 @@
   "start_url": "./counter.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "background_color": "#f5efe7",
   "theme_color": "#2b1708",
   "icons": [
