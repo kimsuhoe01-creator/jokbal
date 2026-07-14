@@ -3,10 +3,10 @@ const tax10 = n => Math.round(n * 1.10);
 const fmt = n => Number(n).toLocaleString('vi-VN') + '₫';
 
 const I18N = {
-  ko:{storeName:'족발신선생 박닌점',map:'지도',heroKicker:'🔥 500°C 화덕의 맛',heroTitle:'화덕 반반메뉴',heroDescription:'족발 · 보쌈 · 매운족발 · 냉채족발 · 매운보쌈 · 화덕족발 · 화덕보쌈 중 2가지 선택',freeServiceTarget:'적용 메인메뉴 주문 고객',freeServiceTitle:'홀 무료 서비스',freeServiceChoiceTitle:'아래 2개 중 1개를 선택해주세요',freeServiceNoodle:'쟁반국수',freeServiceOr:'또는',freeServicePizza:'고르곤졸라피자',freeServiceIncluded:'+ 짬뽕순두부 + 계란찜도 함께 무료',freeServiceBenefit:'쟁반국수 또는 고르곤졸라피자 + 짬뽕순두부 + 계란찜',freeServiceNote:'※ 미니족 메뉴 · 1인 메뉴 · 식사 메뉴 제외',dineInOnly:'홀 식사 한정',call:'전화 주문',delivery:'DeliveryK 배달',priceNote:'가격은 VND 기준이며 POS/영수증 가격과 동일합니다.',detail:'자세히 보기',close:'접기',hall:'홀 식사',hallBenefit:'쟁반국수 또는 고르곤졸라 + 짬뽕순두부 + 계란찜',takeaway:'배달 · 포장',takeBenefit:'족발볶음밥 + 막국수 서비스',people:'추천인원',photoReady:'사진 준비중',recommend:'추천',oven:'화덕',main:'메인',half:'반반',solo:'1인',side:'사이드',meal:'식사·탕',drink:'주류·음료',single:'가격',soju_std:'참이슬·진로·처음처럼·새로',soju_sunyang:'선양·선양오크',soft_all:'콜라·스프라이트·환타',tiger:'Tiger',s:'소',m:'중',l:'대'},
-  vi:{storeName:'Jokbal Sin Seon Saeng Bắc Ninh',map:'Bản đồ',heroKicker:'🔥 Hương vị lò nướng 500°C',heroTitle:'Set 2 món đút lò',heroDescription:'Chọn 2 trong 7 món: chân giò, ba chỉ, chân giò cay, chân giò sốt mù tạt, ba chỉ cay, chân giò đút lò, ba chỉ đút lò',freeServiceTarget:'Khách gọi món chính áp dụng',freeServiceTitle:'Quà tặng miễn phí tại quán',freeServiceChoiceTitle:'Vui lòng chọn 1 trong 2 món',freeServiceNoodle:'Mỳ khay',freeServiceOr:'hoặc',freeServicePizza:'Pizza Gorgonzola',freeServiceIncluded:'+ Tặng thêm súp đậu hũ hải sản cay và trứng hấp',freeServiceBenefit:'Tặng mỳ khay hoặc pizza Gorgonzola + súp đậu hũ hải sản cay + trứng hấp',freeServiceNote:'※ Không áp dụng cho món chân giò mini, món 1 người và món cơm/canh',dineInOnly:'Chỉ áp dụng tại quán',call:'Gọi đặt món',delivery:'Đặt DeliveryK',priceNote:'Giá tính bằng VND và trùng với giá POS/hóa đơn.',detail:'Xem thêm',close:'Thu gọn',hall:'Ăn tại quán',hallBenefit:'Tặng mỳ khay hoặc pizza Gorgonzola + súp đậu hũ hải sản + trứng hấp',takeaway:'Giao hàng · Mang về',takeBenefit:'Tặng cơm rang chân giò + mỳ trộn',people:'Khẩu phần gợi ý',photoReady:'Đang chuẩn bị ảnh',recommend:'Gợi ý',oven:'Món đút lò',main:'Món chính',half:'2 món',solo:'1 người',side:'Món phụ',meal:'Cơm · Canh',drink:'Đồ uống',single:'Giá',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coca · Sprite · Fanta',tiger:'Tiger',s:'Nhỏ',m:'Vừa',l:'Lớn'},
-  en:{storeName:'Jokbal Sin Seon Saeng Bac Ninh',map:'Map',heroKicker:'🔥 500°C Oven-Roasted Flavor',heroTitle:'Oven Half & Half',heroDescription:'Choose 2: jokbal, bossam, spicy jokbal, cold jokbal, spicy bossam, oven jokbal, or oven bossam',freeServiceTarget:'With an eligible main-menu order',freeServiceTitle:'Free Dine-in Service',freeServiceChoiceTitle:'Please choose 1 of the 2 options',freeServiceNoodle:'Noodle Platter',freeServiceOr:'or',freeServicePizza:'Gorgonzola Pizza',freeServiceIncluded:'+ Spicy seafood tofu soup and steamed egg are also included',freeServiceBenefit:'Choose a noodle platter or Gorgonzola pizza, plus spicy seafood tofu soup and steamed egg',freeServiceNote:'※ Not available with mini jokbal, single-person, or meal/soup menu items',dineInOnly:'Dine-in only',call:'Call',delivery:'DeliveryK',priceNote:'Prices are in VND and match POS/receipt prices.',detail:'More details',close:'Order more',hall:'Dine-in',hallBenefit:'Noodle platter or Gorgonzola pizza + spicy seafood tofu soup + steamed egg included',takeaway:'Delivery · Takeaway',takeBenefit:'Jokbal fried rice + spicy noodles included',people:'Recommended serving',photoReady:'Photo coming soon',recommend:'Recommended',oven:'Oven Menu',main:'Mains',half:'Half & Half',solo:'For One',side:'Sides',meal:'Meals · Soups',drink:'Drinks',single:'Price',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coke · Sprite · Fanta',tiger:'Tiger',s:'S',m:'M',l:'L'},
-  zh:{storeName:'猪蹄新先生 北宁店',map:'地图',heroKicker:'🔥 500°C 烤炉风味',heroTitle:'烤炉双拼',heroDescription:'猪蹄、菜包肉、辣猪蹄、芥末凉拌猪蹄、辣五花肉、烤炉猪蹄、烤炉五花肉中任选2种',freeServiceTarget:'购买适用主菜的顾客',freeServiceTitle:'堂食免费服务',freeServiceChoiceTitle:'请从以下2项中选择1项',freeServiceNoodle:'拌面拼盘',freeServiceOr:'或',freeServicePizza:'戈贡佐拉披萨',freeServiceIncluded:'+ 另赠海鲜嫩豆腐汤和蒸蛋',freeServiceBenefit:'拌面拼盘或戈贡佐拉披萨（二选一）+ 海鲜嫩豆腐汤 + 蒸蛋',freeServiceNote:'※ 迷你猪蹄、单人餐及饭/汤类菜单不适用',dineInOnly:'仅限堂食',call:'电话订餐',delivery:'DeliveryK 外卖',priceNote:'价格单位为VND，与POS/小票价格一致。',detail:'查看详情',close:'收起',hall:'堂食',hallBenefit:'赠送拌面拼盘或戈贡佐拉披萨 + 海鲜嫩豆腐汤 + 蒸蛋',takeaway:'外卖 · 打包',takeBenefit:'赠送猪蹄炒饭 + 拌面',people:'建议人数',photoReady:'照片准备中',recommend:'推荐',oven:'烤炉菜单',main:'主菜',half:'双拼',solo:'单人餐',side:'配菜',meal:'饭 · 汤',drink:'酒水饮料',single:'价格',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coke · Sprite · Fanta',tiger:'Tiger',s:'小',m:'中',l:'大'}
+  ko:{storeName:'족발신선생 박닌점',map:'지도',completeOrder:'주문 완료',heroKicker:'🔥 500°C 화덕의 맛',heroTitle:'화덕 반반메뉴',heroDescription:'족발 · 보쌈 · 매운족발 · 냉채족발 · 매운보쌈 · 화덕족발 · 화덕보쌈 중 2가지 선택',freeServiceTarget:'적용 메인메뉴 주문 고객',freeServiceTitle:'홀 무료 서비스',freeServiceChoiceTitle:'아래 2개 중 1개를 선택해주세요',freeServiceNoodle:'쟁반국수',freeServiceOr:'또는',freeServicePizza:'고르곤졸라피자',freeServiceIncluded:'+ 짬뽕순두부 + 계란찜도 함께 무료',freeServiceBenefit:'쟁반국수 또는 고르곤졸라피자 + 짬뽕순두부 + 계란찜',freeServiceNote:'※ 미니족 메뉴 · 1인 메뉴 · 식사 메뉴 제외',dineInOnly:'홀 식사 한정',call:'전화 주문',delivery:'DeliveryK 배달',priceNote:'가격은 VND 기준이며 POS/영수증 가격과 동일합니다.',detail:'자세히 보기',close:'접기',hall:'홀 식사',hallBenefit:'쟁반국수 또는 고르곤졸라 + 짬뽕순두부 + 계란찜',takeaway:'배달 · 포장',takeBenefit:'족발볶음밥 + 막국수 서비스',people:'추천인원',photoReady:'사진 준비중',recommend:'추천',oven:'화덕',main:'메인',half:'반반',solo:'1인',side:'사이드',meal:'식사·탕',drink:'주류·음료',single:'가격',soju_std:'참이슬·진로·처음처럼·새로',soju_sunyang:'선양·선양오크',soft_all:'콜라·스프라이트·환타',tiger:'Tiger',s:'소',m:'중',l:'대'},
+  vi:{storeName:'Jokbal Sin Seon Saeng Bắc Ninh',map:'Bản đồ',completeOrder:'Hoàn tất gọi món',heroKicker:'🔥 Hương vị lò nướng 500°C',heroTitle:'Set 2 món đút lò',heroDescription:'Chọn 2 trong 7 món: chân giò, ba chỉ, chân giò cay, chân giò sốt mù tạt, ba chỉ cay, chân giò đút lò, ba chỉ đút lò',freeServiceTarget:'Khách gọi món chính áp dụng',freeServiceTitle:'Quà tặng miễn phí tại quán',freeServiceChoiceTitle:'Vui lòng chọn 1 trong 2 món',freeServiceNoodle:'Mỳ khay',freeServiceOr:'hoặc',freeServicePizza:'Pizza Gorgonzola',freeServiceIncluded:'+ Tặng thêm súp đậu hũ hải sản cay và trứng hấp',freeServiceBenefit:'Tặng mỳ khay hoặc pizza Gorgonzola + súp đậu hũ hải sản cay + trứng hấp',freeServiceNote:'※ Không áp dụng cho món chân giò mini, món 1 người và món cơm/canh',dineInOnly:'Chỉ áp dụng tại quán',call:'Gọi đặt món',delivery:'Đặt DeliveryK',priceNote:'Giá tính bằng VND và trùng với giá POS/hóa đơn.',detail:'Xem thêm',close:'Thu gọn',hall:'Ăn tại quán',hallBenefit:'Tặng mỳ khay hoặc pizza Gorgonzola + súp đậu hũ hải sản + trứng hấp',takeaway:'Giao hàng · Mang về',takeBenefit:'Tặng cơm rang chân giò + mỳ trộn',people:'Khẩu phần gợi ý',photoReady:'Đang chuẩn bị ảnh',recommend:'Gợi ý',oven:'Món đút lò',main:'Món chính',half:'2 món',solo:'1 người',side:'Món phụ',meal:'Cơm · Canh',drink:'Đồ uống',single:'Giá',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coca · Sprite · Fanta',tiger:'Tiger',s:'Nhỏ',m:'Vừa',l:'Lớn'},
+  en:{storeName:'Jokbal Sin Seon Saeng Bac Ninh',map:'Map',completeOrder:'Complete order',heroKicker:'🔥 500°C Oven-Roasted Flavor',heroTitle:'Oven Half & Half',heroDescription:'Choose 2: jokbal, bossam, spicy jokbal, cold jokbal, spicy bossam, oven jokbal, or oven bossam',freeServiceTarget:'With an eligible main-menu order',freeServiceTitle:'Free Dine-in Service',freeServiceChoiceTitle:'Please choose 1 of the 2 options',freeServiceNoodle:'Noodle Platter',freeServiceOr:'or',freeServicePizza:'Gorgonzola Pizza',freeServiceIncluded:'+ Spicy seafood tofu soup and steamed egg are also included',freeServiceBenefit:'Choose a noodle platter or Gorgonzola pizza, plus spicy seafood tofu soup and steamed egg',freeServiceNote:'※ Not available with mini jokbal, single-person, or meal/soup menu items',dineInOnly:'Dine-in only',call:'Call',delivery:'DeliveryK',priceNote:'Prices are in VND and match POS/receipt prices.',detail:'More details',close:'Order more',hall:'Dine-in',hallBenefit:'Noodle platter or Gorgonzola pizza + spicy seafood tofu soup + steamed egg included',takeaway:'Delivery · Takeaway',takeBenefit:'Jokbal fried rice + spicy noodles included',people:'Recommended serving',photoReady:'Photo coming soon',recommend:'Recommended',oven:'Oven Menu',main:'Mains',half:'Half & Half',solo:'For One',side:'Sides',meal:'Meals · Soups',drink:'Drinks',single:'Price',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coke · Sprite · Fanta',tiger:'Tiger',s:'S',m:'M',l:'L'},
+  zh:{storeName:'猪蹄新先生 北宁店',map:'地图',completeOrder:'完成点餐',heroKicker:'🔥 500°C 烤炉风味',heroTitle:'烤炉双拼',heroDescription:'猪蹄、菜包肉、辣猪蹄、芥末凉拌猪蹄、辣五花肉、烤炉猪蹄、烤炉五花肉中任选2种',freeServiceTarget:'购买适用主菜的顾客',freeServiceTitle:'堂食免费服务',freeServiceChoiceTitle:'请从以下2项中选择1项',freeServiceNoodle:'拌面拼盘',freeServiceOr:'或',freeServicePizza:'戈贡佐拉披萨',freeServiceIncluded:'+ 另赠海鲜嫩豆腐汤和蒸蛋',freeServiceBenefit:'拌面拼盘或戈贡佐拉披萨（二选一）+ 海鲜嫩豆腐汤 + 蒸蛋',freeServiceNote:'※ 迷你猪蹄、单人餐及饭/汤类菜单不适用',dineInOnly:'仅限堂食',call:'电话订餐',delivery:'DeliveryK 外卖',priceNote:'价格单位为VND，与POS/小票价格一致。',detail:'查看详情',close:'收起',hall:'堂食',hallBenefit:'赠送拌面拼盘或戈贡佐拉披萨 + 海鲜嫩豆腐汤 + 蒸蛋',takeaway:'外卖 · 打包',takeBenefit:'赠送猪蹄炒饭 + 拌面',people:'建议人数',photoReady:'照片准备中',recommend:'推荐',oven:'烤炉菜单',main:'主菜',half:'双拼',solo:'单人餐',side:'配菜',meal:'饭 · 汤',drink:'酒水饮料',single:'价格',soju_std:'Chamisul · Jinro · Chum Churum · Saero',soju_sunyang:'Sunyang · Sunyang Oak',soft_all:'Coke · Sprite · Fanta',tiger:'Tiger',s:'小',m:'中',l:'大'}
 };
 
 const CATS = ['recommend','oven','main','meal','solo','side','drink'];
@@ -72,10 +72,10 @@ let categoryTrackingBound = false;
 let categoryFramePending = false;
 const CAT_ICONS = {recommend:'🔥', oven:'♨️', main:'🥩', solo:'👤', side:'🥢', meal:'🍚', drink:'🍺'};
 const UI = {
-  ko:{addCart:'장바구니 담기', cart:'장바구니', viewCart:'장바구니 보기', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문', giftEligible:'🎁 홀 무료 서비스 선택 가능',chooseFreeGift:'홀 무료 서비스 선택 (필수)',freeGiftHelp:'쟁반국수 또는 고르곤졸라피자 중 1개를 골라주세요.',needFreeGift:'홀 무료 서비스 메뉴를 선택해주세요.',giftLabel:'홀 무료 서비스', added:'✓ 장바구니에 담았습니다',continueOrder:'계속 주문',submitOrder:'주문 완료',sendOrder:'주문 완료 · 직원에게 전송',sending:'주문 전송 중...',tableSetup:'테이블 설정',tableLabel:'테이블 번호',tablePlaceholder:'예: T1 / 3번 테이블',save:'저장',orderSent:'주문이 전송되었습니다',waitingStaff:'직원 확인을 기다리고 있습니다.',acceptedOrder:'직원이 주문을 확인했습니다.',posDoneOrder:'POS 입력이 완료되었습니다.',completedOrder:'주문 접수가 완료되었습니다.',cancelledOrder:'주문이 취소 처리되었습니다.',newOrder:'추가 주문 시작',noRealtime:'실시간 주문 연결 설정이 필요합니다.',noTable:'테이블 번호를 먼저 설정해주세요.',sendFailed:'주문 전송에 실패했습니다. 인터넷 연결을 확인해주세요.',confirmSend:'이 주문을 직원에게 전송할까요?',orderNumber:'주문번호',tableSaved:'테이블 번호를 저장했습니다.'},
-  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', viewCart:'Xem giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', giftEligible:'🎁 Có quà miễn phí tại quán',chooseFreeGift:'Chọn quà tại quán (bắt buộc)',freeGiftHelp:'Chọn 1 trong 2: mỳ khay hoặc pizza Gorgonzola.',needFreeGift:'Vui lòng chọn quà miễn phí tại quán.',giftLabel:'Quà tại quán', added:'✓ Đã thêm vào giỏ',continueOrder:'Tiếp tục chọn món',submitOrder:'Hoàn tất gọi món',sendOrder:'Hoàn tất · Gửi cho nhân viên',sending:'Đang gửi đơn...',tableSetup:'Cài đặt bàn',tableLabel:'Số bàn',tablePlaceholder:'VD: T1 / Bàn 3',save:'Lưu',orderSent:'Đã gửi đơn hàng',waitingStaff:'Đang chờ nhân viên xác nhận.',acceptedOrder:'Nhân viên đã xác nhận đơn.',posDoneOrder:'Đã nhập đơn vào POS.',completedOrder:'Đơn hàng đã được tiếp nhận.',cancelledOrder:'Đơn hàng đã bị hủy.',newOrder:'Gọi thêm món',noRealtime:'Cần thiết lập kết nối đơn hàng thời gian thực.',noTable:'Vui lòng thiết lập số bàn trước.',sendFailed:'Không gửi được đơn. Vui lòng kiểm tra Internet.',confirmSend:'Gửi đơn này cho nhân viên?',orderNumber:'Mã đơn',tableSaved:'Đã lưu số bàn.'},
-  en:{addCart:'Add to cart', cart:'Cart', viewCart:'View cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', giftEligible:'🎁 Free dine-in gift available',chooseFreeGift:'Choose a dine-in gift (required)',freeGiftHelp:'Choose one: noodle platter or Gorgonzola pizza.',needFreeGift:'Please select your free dine-in gift.',giftLabel:'Dine-in gift', added:'✓ Added to cart',continueOrder:'Continue ordering',submitOrder:'Complete order',sendOrder:'Complete · Send to staff',sending:'Sending order...',tableSetup:'Set table',tableLabel:'Table number',tablePlaceholder:'e.g. T1 / Table 3',save:'Save',orderSent:'Order sent',waitingStaff:'Waiting for staff confirmation.',acceptedOrder:'Staff confirmed your order.',posDoneOrder:'The order was entered into POS.',completedOrder:'Your order has been received.',cancelledOrder:'The order was cancelled.',newOrder:'Start another order',noRealtime:'Real-time order connection must be configured.',noTable:'Please set the table number first.',sendFailed:'Could not send the order. Check the internet connection.',confirmSend:'Send this order to staff?',orderNumber:'Order No.',tableSaved:'Table number saved.'},
-  zh:{addCart:'加入购物车', cart:'购物车', viewCart:'查看购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', giftEligible:'🎁 可选择堂食免费赠品',chooseFreeGift:'选择堂食赠品（必选）',freeGiftHelp:'拌面拼盘或戈贡佐拉披萨二选一。',needFreeGift:'请选择堂食免费赠品。',giftLabel:'堂食赠品', added:'✓ 已加入购物车',continueOrder:'继续点餐',submitOrder:'完成点餐',sendOrder:'完成点餐 · 发送给员工',sending:'正在发送订单...',tableSetup:'设置桌号',tableLabel:'桌号',tablePlaceholder:'例：T1 / 3号桌',save:'保存',orderSent:'订单已发送',waitingStaff:'正在等待员工确认。',acceptedOrder:'员工已确认订单。',posDoneOrder:'订单已录入POS。',completedOrder:'订单已受理。',cancelledOrder:'订单已取消。',newOrder:'继续加单',noRealtime:'需要设置实时订单连接。',noTable:'请先设置桌号。',sendFailed:'订单发送失败，请检查网络连接。',confirmSend:'要把此订单发送给员工吗？',orderNumber:'订单号',tableSaved:'桌号已保存。'}
+  ko:{addCart:'장바구니 담기', cart:'장바구니', viewCart:'장바구니 보기', empty:'장바구니가 비어 있습니다.',selectTable:'테이블을 선택해주세요.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문', giftEligible:'🎁 홀 무료 서비스 선택 가능',chooseFreeGift:'홀 무료 서비스 선택 (필수)',freeGiftHelp:'쟁반국수 또는 고르곤졸라피자 중 1개를 골라주세요.',needFreeGift:'홀 무료 서비스 메뉴를 선택해주세요.',giftLabel:'홀 무료 서비스', added:'✓ 장바구니에 담았습니다',continueOrder:'계속 주문',submitOrder:'주문 완료',sendOrder:'주문 완료 · 직원에게 전송',sending:'주문 전송 중...',tableSetup:'테이블 설정',tableLabel:'테이블 번호',tablePlaceholder:'예: T1 / 3번 테이블',save:'저장',orderSent:'주문이 완료되었습니다.',waitingStaff:'직원을 기다려 주세요.',acceptedOrder:'주문이 완료되었습니다.',posDoneOrder:'주문이 완료되었습니다.',completedOrder:'주문이 완료되었습니다.',cancelledOrder:'주문이 취소 처리되었습니다.',newOrder:'추가 주문 시작',noRealtime:'실시간 주문 연결 설정이 필요합니다.',noTable:'테이블 번호를 먼저 설정해주세요.',sendFailed:'주문 전송에 실패했습니다. 인터넷 연결을 확인해주세요.',confirmSend:'이 주문을 직원에게 전송할까요?',orderNumber:'주문번호',tableSaved:'테이블 번호를 저장했습니다.'},
+  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', viewCart:'Xem giỏ món', empty:'Giỏ món đang trống.',selectTable:'Vui lòng chọn bàn.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', giftEligible:'🎁 Có quà miễn phí tại quán',chooseFreeGift:'Chọn quà tại quán (bắt buộc)',freeGiftHelp:'Chọn 1 trong 2: mỳ khay hoặc pizza Gorgonzola.',needFreeGift:'Vui lòng chọn quà miễn phí tại quán.',giftLabel:'Quà tại quán', added:'✓ Đã thêm vào giỏ',continueOrder:'Tiếp tục chọn món',submitOrder:'Hoàn tất gọi món',sendOrder:'Hoàn tất · Gửi cho nhân viên',sending:'Đang gửi đơn...',tableSetup:'Cài đặt bàn',tableLabel:'Số bàn',tablePlaceholder:'VD: T1 / Bàn 3',save:'Lưu',orderSent:'Đã hoàn tất gọi món.',waitingStaff:'Vui lòng chờ nhân viên.',acceptedOrder:'Đã hoàn tất gọi món.',posDoneOrder:'Đã hoàn tất gọi món.',completedOrder:'Đã hoàn tất gọi món.',cancelledOrder:'Đơn hàng đã bị hủy.',newOrder:'Gọi thêm món',noRealtime:'Cần thiết lập kết nối đơn hàng thời gian thực.',noTable:'Vui lòng thiết lập số bàn trước.',sendFailed:'Không gửi được đơn. Vui lòng kiểm tra Internet.',confirmSend:'Gửi đơn này cho nhân viên?',orderNumber:'Mã đơn',tableSaved:'Đã lưu số bàn.'},
+  en:{addCart:'Add to cart', cart:'Cart', viewCart:'View cart', empty:'Cart is empty.',selectTable:'Please select your table.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', giftEligible:'🎁 Free dine-in gift available',chooseFreeGift:'Choose a dine-in gift (required)',freeGiftHelp:'Choose one: noodle platter or Gorgonzola pizza.',needFreeGift:'Please select your free dine-in gift.',giftLabel:'Dine-in gift', added:'✓ Added to cart',continueOrder:'Continue ordering',submitOrder:'Complete order',sendOrder:'Complete · Send to staff',sending:'Sending order...',tableSetup:'Set table',tableLabel:'Table number',tablePlaceholder:'e.g. T1 / Table 3',save:'Save',orderSent:'Order completed.',waitingStaff:'Please wait for a staff member.',acceptedOrder:'Order completed.',posDoneOrder:'Order completed.',completedOrder:'Order completed.',cancelledOrder:'The order was cancelled.',newOrder:'Start another order',noRealtime:'Real-time order connection must be configured.',noTable:'Please set the table number first.',sendFailed:'Could not send the order. Check the internet connection.',confirmSend:'Send this order to staff?',orderNumber:'Order No.',tableSaved:'Table number saved.'},
+  zh:{addCart:'加入购物车', cart:'购物车', viewCart:'查看购物车', empty:'购物车为空。',selectTable:'请选择桌号。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', giftEligible:'🎁 可选择堂食免费赠品',chooseFreeGift:'选择堂食赠品（必选）',freeGiftHelp:'拌面拼盘或戈贡佐拉披萨二选一。',needFreeGift:'请选择堂食免费赠品。',giftLabel:'堂食赠品', added:'✓ 已加入购物车',continueOrder:'继续点餐',submitOrder:'完成点餐',sendOrder:'完成点餐 · 发送给员工',sending:'正在发送订单...',tableSetup:'设置桌号',tableLabel:'桌号',tablePlaceholder:'例：T1 / 3号桌',save:'保存',orderSent:'点餐已完成。',waitingStaff:'请等待工作人员。',acceptedOrder:'点餐已完成。',posDoneOrder:'点餐已完成。',completedOrder:'点餐已完成。',cancelledOrder:'订单已取消。',newOrder:'继续加单',noRealtime:'需要设置实时订单连接。',noTable:'请先设置桌号。',sendFailed:'订单发送失败，请检查网络连接。',confirmSend:'要把此订单发送给员工吗？',orderNumber:'订单号',tableSaved:'桌号已保存。'}
 };const SIZE_LABELS = {
   single:{ko:'단품',vi:'Một phần',en:'Single',zh:'单品'}, s:{ko:'소',vi:'Nhỏ',en:'S',zh:'小'}, m:{ko:'중',vi:'Vừa',en:'M',zh:'中'}, l:{ko:'대',vi:'Lớn',en:'L',zh:'大'},
   tiger:{ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường',en:'Regular soju',zh:'普通烧酒'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang',en:'Sunyang line',zh:'鲜洋系列'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt',en:'Choose soft drink',zh:'选择饮料'}
@@ -114,7 +114,7 @@ function applyText(){
   document.title = `${t('storeName')} · ${t('heroTitle')}`;
   requestAnimationFrame(updateStickyMetrics);
 }
-function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); syncTableBadge(); restoreLastOrderStatus(); }
+function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); syncTableBadge(); setTimeout(ensureTableSelected, 250); }
 function showLang(){ $('#app').classList.add('hidden'); $('#langScreen').classList.remove('hidden'); }
 
 document.querySelectorAll('[data-lang]').forEach(btn => btn.addEventListener('click', () => { lang = btn.dataset.lang; localStorage.setItem('jokbal_lang', lang); showApp(); }));
@@ -327,12 +327,22 @@ function initCartUI(){
         <div class="sheet-actions"><button id="staffBack" type="button" class="ghost">${ui('editOrder')}</button><button id="staffDone" type="button" class="primary">${ui('addOrder')}</button></div>
       </div>
     </div>
-    <div id="tableSheet" class="sheet hidden" role="dialog" aria-modal="true">
+    <div id="tableSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="tableSheetTitle">
       <div class="sheet-card table-card">
-        <div class="sheet-head"><strong>🪑 ${ui('tableSetup')}</strong><button id="tableClose" type="button">×</button></div>
-        <label class="table-label" for="tableInput">${ui('tableLabel')}</label>
-        <input id="tableInput" class="table-input" type="text" maxlength="30" placeholder="${ui('tablePlaceholder')}" autocomplete="off">
-        <div class="sheet-actions"><button id="tableCancel" type="button" class="ghost">${ui('cancel')}</button><button id="tableSave" type="button" class="primary">${ui('save')}</button></div>
+        <div class="sheet-head"><strong id="tableSheetTitle">🪑 ${ui('tableSetup')}</strong><button id="tableClose" type="button">×</button></div>
+        <p class="table-guide">${ui('selectTable')}</p>
+        <div class="table-zone-list">
+          <section class="table-zone"><h3>1</h3><div class="table-choice-grid">
+            ${['1-1','1-2','1-3','1-4','1-5','1-6','1-7'].map(label => `<button type="button" data-table-label="${label}">${label}</button>`).join('')}
+          </div></section>
+          <section class="table-zone"><h3>2</h3><div class="table-choice-grid">
+            ${['2-8','2-9','2-10','2-11','2-12'].map(label => `<button type="button" data-table-label="${label}">${label}</button>`).join('')}
+          </div></section>
+          <section class="table-zone"><h3>3</h3><div class="table-choice-grid single-table-row">
+            <button type="button" data-table-label="3-13">3-13</button>
+          </div></section>
+        </div>
+        <div class="sheet-actions table-sheet-actions"><button id="tableCancel" type="button" class="ghost">${ui('cancel')}</button></div>
       </div>
     </div>
     <div id="orderStatusSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-live="polite">
@@ -354,6 +364,8 @@ function initCartUI(){
   if (cartFabEl && topbar && topActions) topbar.insertBefore(cartFabEl, topActions);
   $('#cartFab').onclick = openCart;
   $('#tableBadge').onclick = openTableSetup;
+  const completeOrderButton = document.getElementById('completeOrderButton');
+  if(completeOrderButton) completeOrderButton.onclick = handleTopCompleteOrder;
   $('#orderClose').onclick = closeOrderSheet;
   $('#orderCancel').onclick = closeOrderSheet;
   $('#orderSheet').addEventListener('click', e => { if(e.target.id === 'orderSheet') closeOrderSheet(); });
@@ -371,8 +383,9 @@ function initCartUI(){
   $('#staffSheet').addEventListener('click', e => { if(e.target.id === 'staffSheet') closeStaffConfirm(); });
   $('#tableClose').onclick = closeTableSetup;
   $('#tableCancel').onclick = closeTableSetup;
-  $('#tableSave').onclick = saveTableSetup;
-  $('#tableInput').addEventListener('keydown', e => { if(e.key === 'Enter') saveTableSetup(); });
+  document.querySelectorAll('#tableSheet [data-table-label]').forEach(button => {
+    button.onclick = () => saveTableSetup(button.dataset.tableLabel || '');
+  });
   $('#tableSheet').addEventListener('click', e => { if(e.target.id === 'tableSheet') closeTableSetup(); });
   $('#statusClose').onclick = closeOrderStatus;
   $('#statusContinue').onclick = closeOrderStatus;
@@ -526,9 +539,14 @@ function showCartToast(){
 
 function updateCartButton(){
   const count = cart.reduce((s,i)=>s+i.qty,0);
-  const fab = $('#cartFab'); if(!fab) return;
-  $('#cartCount').textContent = count;
-  fab.classList.toggle('has-items', count > 0);
+  const fab = $('#cartFab');
+  const cartCount = document.getElementById('cartCount');
+  const completeCount = document.getElementById('completeOrderCount');
+  const completeButton = document.getElementById('completeOrderButton');
+  if(cartCount) cartCount.textContent = count;
+  if(completeCount) completeCount.textContent = count;
+  fab?.classList.toggle('has-items', count > 0);
+  completeButton?.classList.toggle('has-items', count > 0);
 }
 function renderCart(){
   const box = $('#cartItems'); if(!box) return;
@@ -547,34 +565,49 @@ function renderCart(){
   document.getElementById('cartSubmit')?.removeAttribute('disabled');
 }
 
-let currentOrderUnsubscribe = null;
-let currentOrderId = '';
-let statusRestoreStarted = false;
+let pendingSubmitAfterTableSelection = false;
 
 function realtimeApi(){ return window.JokbalRealtime || null; }
+function currentTableLabel(){
+  return realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
+}
 function syncTableBadge(){
   const badge = document.getElementById('tableBadgeText');
   if(!badge) return;
-  const table = realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
+  const table = currentTableLabel();
   badge.textContent = table || ui('tableSetup');
   document.getElementById('tableBadge')?.classList.toggle('configured', Boolean(table));
+  document.querySelectorAll('#tableSheet [data-table-label]').forEach(button => {
+    button.classList.toggle('selected', button.dataset.tableLabel === table);
+    button.setAttribute('aria-pressed', button.dataset.tableLabel === table ? 'true' : 'false');
+  });
+}
+function ensureTableSelected(){
+  if(currentTableLabel()) return;
+  if(document.getElementById('app')?.classList.contains('hidden')) return;
+  openTableSetup();
 }
 function openTableSetup(){
   initCartUI();
-  const input = document.getElementById('tableInput');
-  input.value = realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
-  document.getElementById('tableSheet').classList.remove('hidden');
-  setTimeout(() => input.focus(), 80);
-}
-function closeTableSetup(){ document.getElementById('tableSheet')?.classList.add('hidden'); }
-function saveTableSetup(){
-  const value = document.getElementById('tableInput')?.value?.trim() || '';
-  if(!value){ alert(ui('noTable')); return; }
-  if(realtimeApi()?.setTableLabel) realtimeApi().setTableLabel(value);
-  else localStorage.setItem('jokbal_table_label', value);
   syncTableBadge();
-  closeTableSetup();
-  showCartToastMessage(ui('tableSaved'));
+  document.getElementById('tableSheet')?.classList.remove('hidden');
+}
+function closeTableSetup(){
+  document.getElementById('tableSheet')?.classList.add('hidden');
+  if(!currentTableLabel()) pendingSubmitAfterTableSelection = false;
+}
+function saveTableSetup(value){
+  const normalized = String(value || '').trim();
+  if(!normalized){ alert(ui('noTable')); return; }
+  if(realtimeApi()?.setTableLabel) realtimeApi().setTableLabel(normalized);
+  else localStorage.setItem('jokbal_table_label', normalized);
+  syncTableBadge();
+  document.getElementById('tableSheet')?.classList.add('hidden');
+  showCartToastMessage(`${ui('tableSaved')} (${normalized})`);
+  if(pendingSubmitAfterTableSelection){
+    pendingSubmitAfterTableSelection = false;
+    setTimeout(submitCartOrder, 180);
+  }
 }
 function showCartToastMessage(message){
   initCartUI();
@@ -583,7 +616,7 @@ function showCartToastMessage(message){
   toast.textContent = message;
   toast.classList.remove('hidden');
   clearTimeout(showCartToastMessage.timer);
-  showCartToastMessage.timer = setTimeout(() => toast.classList.add('hidden'), 1400);
+  showCartToastMessage.timer = setTimeout(() => toast.classList.add('hidden'), 1600);
 }
 function serializeOptions(options){
   return (options || []).map(option => ({
@@ -620,79 +653,66 @@ function buildOrderPayload(tableLabel){
     total: items.reduce((sum,item) => sum + item.lineTotal, 0)
   };
 }
+function handleTopCompleteOrder(){
+  if(!cart.length){
+    openCart();
+    showCartToastMessage(ui('empty'));
+    return;
+  }
+  submitCartOrder();
+}
 async function submitCartOrder(){
-  if(!cart.length) return;
+  if(!cart.length){
+    openCart();
+    showCartToastMessage(ui('empty'));
+    return;
+  }
   const api = realtimeApi();
   if(!api?.isConfigured?.()){
     alert(ui('noRealtime'));
     return;
   }
-  let tableLabel = api.getTableLabel?.() || '';
-  if(!tableLabel){ openTableSetup(); return; }
+  const tableLabel = currentTableLabel();
+  if(!tableLabel){
+    pendingSubmitAfterTableSelection = true;
+    openTableSetup();
+    return;
+  }
   if(!confirm(ui('confirmSend'))) return;
-  const button = document.getElementById('cartSubmit');
-  const oldText = button?.textContent || '';
-  if(button){ button.disabled = true; button.textContent = ui('sending'); }
+  const cartButton = document.getElementById('cartSubmit');
+  const topButton = document.getElementById('completeOrderButton');
+  const oldCartText = cartButton?.textContent || '';
+  const oldTopHtml = topButton?.innerHTML || '';
+  if(cartButton){ cartButton.disabled = true; cartButton.textContent = ui('sending'); }
+  if(topButton){ topButton.disabled = true; topButton.innerHTML = `<span class="complete-order-label">⏳ ${ui('sending')}</span>`; }
   try{
     const order = await api.submitOrder(buildOrderPayload(tableLabel));
     cart = [];
     renderCart();
     updateCartButton();
     closeCart();
+    api.clearLastOrderId?.();
     showOrderStatus(order);
   }catch(error){
     console.error(error);
     alert(error?.message === 'FIREBASE_NOT_CONFIGURED' ? ui('noRealtime') : ui('sendFailed'));
   }finally{
-    if(button){ button.disabled = cart.length === 0; button.textContent = oldText || `✅ ${ui('sendOrder')}`; }
+    if(cartButton){ cartButton.disabled = cart.length === 0; cartButton.textContent = oldCartText || `✅ ${ui('sendOrder')}`; }
+    if(topButton){ topButton.disabled = false; topButton.innerHTML = oldTopHtml || `<span class="complete-order-label">✅ ${t('completeOrder')}</span><b id="completeOrderCount">0</b>`; }
+    updateCartButton();
   }
-}
-function orderStatusCopy(status){
-  if(status === 'accepted') return {icon:'👩‍🍳', title:ui('orderSent'), message:ui('acceptedOrder')};
-  if(status === 'pos_done') return {icon:'🧾', title:ui('orderSent'), message:ui('posDoneOrder')};
-  if(status === 'completed') return {icon:'✅', title:ui('completedOrder'), message:ui('completedOrder')};
-  if(status === 'cancelled') return {icon:'⚠️', title:ui('cancelledOrder'), message:ui('cancelledOrder')};
-  return {icon:'📨', title:ui('orderSent'), message:ui('waitingStaff')};
-}
-function renderOrderStatus(order){
-  if(!order) return;
-  initCartUI();
-  const copy = orderStatusCopy(order.status);
-  document.getElementById('statusIcon').textContent = copy.icon;
-  document.getElementById('statusTitle').textContent = copy.title;
-  document.getElementById('statusMessage').textContent = copy.message;
-  document.getElementById('statusTable').textContent = `🪑 ${order.tableLabel || realtimeApi()?.getTableLabel?.() || ''}`;
-  document.getElementById('statusOrderNumber').textContent = `${ui('orderNumber')} #${String(order.id || currentOrderId).slice(-6).toUpperCase()}`;
-  document.getElementById('orderStatusSheet').classList.remove('hidden');
 }
 function showOrderStatus(order){
-  currentOrderId = order?.id || '';
-  renderOrderStatus(order);
-  if(currentOrderUnsubscribe){ currentOrderUnsubscribe(); currentOrderUnsubscribe = null; }
-  if(currentOrderId && realtimeApi()?.listenToOrder){
-    Promise.resolve(realtimeApi().listenToOrder(currentOrderId, liveOrder => {
-      if(liveOrder) renderOrderStatus({id:currentOrderId, ...liveOrder});
-    })).then(unsubscribe => { currentOrderUnsubscribe = unsubscribe; }).catch(console.error);
-  }
+  initCartUI();
+  document.getElementById('statusIcon').textContent = '✅';
+  document.getElementById('statusTitle').textContent = ui('orderSent');
+  document.getElementById('statusMessage').textContent = ui('waitingStaff');
+  document.getElementById('statusTable').textContent = `🪑 ${order?.tableLabel || currentTableLabel()}`;
+  document.getElementById('statusOrderNumber').textContent = `${ui('orderNumber')} #${String(order?.id || '').slice(-6).toUpperCase()}`;
+  document.getElementById('orderStatusSheet').classList.remove('hidden');
 }
 function closeOrderStatus(){ document.getElementById('orderStatusSheet')?.classList.add('hidden'); }
-function restoreLastOrderStatus(){
-  if(statusRestoreStarted) return;
-  const api = realtimeApi();
-  if(!api?.isConfigured?.()) return;
-  const lastId = api.getLastOrderId?.();
-  if(!lastId) return;
-  statusRestoreStarted = true;
-  currentOrderId = lastId;
-  Promise.resolve(api.listenToOrder(lastId, order => {
-    if(!order) return;
-    if(['new','accepted','pos_done'].includes(order.status)) renderOrderStatus({id:lastId, ...order});
-  })).then(unsubscribe => { currentOrderUnsubscribe = unsubscribe; }).catch(error => {
-    statusRestoreStarted = false;
-    console.error(error);
-  });
-}
-window.addEventListener('jokbal:realtime-ready', () => { syncTableBadge(); restoreLastOrderStatus(); });
+window.addEventListener('jokbal:realtime-ready', () => { syncTableBadge(); });
 window.addEventListener('jokbal:table-changed', syncTableBadge);
 
 function openStaffConfirm(){

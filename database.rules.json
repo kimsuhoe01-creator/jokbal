@@ -1,20 +1,46 @@
 {
   "rules": {
-    "staff": {
-      "$uid": {
-        ".read": "auth != null && auth.uid === $uid",
-        ".write": false
-      }
-    },
     "stores": {
       "$storeId": {
         "orders": {
-          ".read": "auth != null && root.child('staff').child(auth.uid).val() === true",
+          ".read": "auth != null",
           ".indexOn": ["createdAt", "status"],
           "$orderId": {
-            ".read": "auth != null && (data.child('customerUid').val() === auth.uid || root.child('staff').child(auth.uid).val() === true)",
-            ".write": "auth != null && ((!data.exists() && newData.child('customerUid').val() === auth.uid && newData.child('storeId').val() === $storeId && newData.child('status').val() === 'new') || root.child('staff').child(auth.uid).val() === true)",
-            ".validate": "newData.hasChildren(['id','storeId','customerUid','deviceId','tableLabel','status','items','total','itemCount','createdAt'])"
+            ".write": "auth != null && ((!data.exists() && newData.child('customerUid').val() === auth.uid && newData.child('storeId').val() === $storeId && newData.child('status').val() === 'new') || (data.exists() && newData.exists() && newData.child('id').val() === data.child('id').val() && newData.child('storeId').val() === data.child('storeId').val() && newData.child('customerUid').val() === data.child('customerUid').val() && newData.child('deviceId').val() === data.child('deviceId').val() && newData.child('tableLabel').val() === data.child('tableLabel').val() && newData.child('createdAt').val() === data.child('createdAt').val() && (newData.child('status').val() === 'new' || newData.child('status').val() === 'completed' || newData.child('status').val() === 'cancelled')))",
+            ".validate": "newData.hasChildren(['id','storeId','customerUid','deviceId','tableLabel','status','items','total','itemCount','createdAt'])",
+            "id": {
+              ".validate": "newData.val() === $orderId"
+            },
+            "storeId": {
+              ".validate": "newData.val() === $storeId"
+            },
+            "customerUid": {
+              ".validate": "newData.isString()"
+            },
+            "deviceId": {
+              ".validate": "newData.isString()"
+            },
+            "tableLabel": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 30"
+            },
+            "status": {
+              ".validate": "newData.val() === 'new' || newData.val() === 'completed' || newData.val() === 'cancelled'"
+            },
+            "items": {
+              ".validate": "newData.exists()"
+            },
+            "total": {
+              ".validate": "newData.isNumber() && newData.val() >= 0"
+            },
+            "itemCount": {
+              ".validate": "newData.isNumber() && newData.val() > 0"
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "updatedAt": {
+              ".validate": "newData.isNumber()"
+            }
           }
         }
       }

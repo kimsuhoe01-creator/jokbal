@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jokbal-order-pwa-v6-realtime';
+const CACHE_NAME = 'jokbal-order-pwa-v8-firebase-linked';
 const CORE_FILES = [
   './',
   './index.html',
@@ -22,33 +22,47 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    ))
   );
   self.clients.claim();
 });
+
+function isAppCode(url) {
+  return url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.css') ||
+    url.pathname.endsWith('.json') ||
+    url.pathname.endsWith('.webmanifest');
+}
+
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request, { cache: 'no-store' });
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    if (request.mode === 'navigate') {
+      const url = new URL(request.url);
+      return caches.match(url.pathname.endsWith('counter.html') ? './counter.html' : './index.html');
+    }
+    throw error;
+  }
+}
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
 
-  if (event.request.mode === 'navigate' || requestUrl.pathname.endsWith('/js/firebase-config.js')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
-          return response;
-        })
-        .catch(async () => {
-          const direct = await caches.match(event.request);
-          if (direct) return direct;
-          if (event.request.mode === 'navigate') {
-            return caches.match(requestUrl.pathname.endsWith('counter.html') ? './counter.html' : './index.html');
-          }
-          return Response.error();
-        })
-    );
+  if (event.request.mode === 'navigate' || isAppCode(requestUrl)) {
+    event.respondWith(networkFirst(event.request));
     return;
   }
 
@@ -57,8 +71,7 @@ self.addEventListener('fetch', event => {
       const network = fetch(event.request)
         .then(response => {
           if (response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
           }
           return response;
         })

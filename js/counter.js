@@ -1,9 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js';
 import {
   getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut
+  signInAnonymously
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 import {
   get,
@@ -23,13 +21,23 @@ import { FIREBASE_CONFIG, STORE_ID, isFirebaseConfigured } from './firebase-conf
 
 const $ = selector => document.querySelector(selector);
 const fmt = value => Number(value || 0).toLocaleString('vi-VN') + '₫';
-const STATUS_LABELS = { new: '신규', accepted: '접수', pos_done: 'POS 입력', completed: '완료', cancelled: '취소' };
-const FILTER_TITLES = { new: '신규 주문', accepted: '접수된 주문', pos_done: 'POS 입력 완료', completed: '완료된 주문', all: '전체 주문' };
+const ACTIVE_STATUSES = new Set(['new', 'accepted', 'pos_done']);
+const STATUS_LABELS = {
+  new: '대기',
+  accepted: '대기',
+  pos_done: '대기',
+  completed: '완료',
+  cancelled: '취소'
+};
+const FILTER_TITLES = {
+  active: '대기 주문',
+  completed: '완료된 주문',
+  all: '전체 주문'
+};
 
-let app;
 let auth;
 let database;
-let currentFilter = 'new';
+let currentFilter = 'active';
 let orders = new Map();
 let knownOrderIds = new Set();
 let unsubscribeListeners = [];
@@ -43,20 +51,6 @@ function setConnection(online) {
   const badge = $('#connectionBadge');
   badge.className = `connection-badge ${online ? 'online' : 'offline'}`;
   badge.textContent = online ? '● 실시간 연결됨' : '● 연결 끊김';
-}
-
-function showLogin(message = '') {
-  $('#dashboard').classList.add('hidden');
-  $('#loginPanel').classList.remove('hidden');
-  $('#logoutButton').classList.add('hidden');
-  $('#loginError').textContent = message;
-}
-
-function showDashboard() {
-  $('#loginPanel').classList.add('hidden');
-  $('#dashboard').classList.remove('hidden');
-  $('#logoutButton').classList.remove('hidden');
-  renderAll();
 }
 
 function updateAlarmButton() {
@@ -107,7 +101,10 @@ function startRepeatingAlarm() {
   clearInterval(alarmTimer);
   playAlarmPattern();
   alarmTimer = setInterval(() => {
-    if (!activeAlertOrderId) return clearInterval(alarmTimer);
+    if (!activeAlertOrderId) {
+      clearInterval(alarmTimer);
+      return;
+    }
     playAlarmPattern();
   }, 6500);
 }
@@ -117,76 +114,111 @@ function stopRepeatingAlarm() {
   alarmTimer = null;
 }
 
+function safeOrderTime(order) {
+  const serverTime = Number(order.createdAt);
+  if (Number.isFinite(serverTime) && serverTime > 0) return serverTime;
+  const localTime = Date.parse(order.submittedAtLocal || '');
+  return Number.isFinite(localTime) ? localTime : Date.now();
+}
+
 function formatTime(order) {
-  const date = order.createdAt ? new Date(order.createdAt) : new Date(order.submittedAtLocal || Date.now());
-  return date.toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+  return new Date(safeOrderTime(order)).toLocaleString('ko-KR', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 }
 
 function elapsedText(order) {
-  const time = Number(order.createdAt) || Date.parse(order.submittedAtLocal || '') || Date.now();
-  const minutes = Math.max(0, Math.floor((Date.now() - time) / 60000));
+  const minutes = Math.max(0, Math.floor((Date.now() - safeOrderTime(order)) / 60000));
   return minutes < 1 ? '방금 전' : `${minutes}분 전`;
 }
 
 function optionText(option) {
   const label = option?.ko || option?.vi || option?.en || option?.zh || '';
-  return option?.kind === 'hallGift' ? `🎁 ${label}` : label;
+  return option?.kind === 'hallGift' ? `🎁 홀 무료 서비스: ${label}` : label;
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  })[char]);
+}
+
+function isActive(order) {
+  return ACTIVE_STATUSES.has(order.status || 'new');
 }
 
 function renderOrderCard(order) {
   const itemRows = (order.items || []).map(item => {
-    const optionLines = (item.options || []).map(option => optionText(option)).filter(Boolean);
+    const optionLines = (item.options || []).map(optionText).filter(Boolean);
     const size = item.sizeKo || item.size || '';
-    return `<div class="order-item"><div><strong>${escapeHtml(item.nameKo || item.name || '')}</strong>${size && size !== '단품' ? `<small>사이즈: ${escapeHtml(size)}</small>` : ''}${optionLines.length ? `<small>${optionLines.map(escapeHtml).join('<br>')}</small>` : ''}</div><span class="order-item-qty">× ${Number(item.qty || 0)}</span></div>`;
+    return `
+      <div class="order-item">
+        <div>
+          <strong>${escapeHtml(item.nameKo || item.name || '')}</strong>
+          ${size && size !== '단품' && size !== 'single' ? `<small>사이즈: ${escapeHtml(size)}</small>` : ''}
+          ${optionLines.length ? `<small>${optionLines.map(escapeHtml).join('<br>')}</small>` : ''}
+        </div>
+        <span class="order-item-qty">× ${Number(item.qty || 0)}</span>
+      </div>`;
   }).join('');
+
   const status = order.status || 'new';
-  const nextAction = status === 'new'
-    ? `<button class="primary" data-action="accepted">주문 접수</button>`
-    : status === 'accepted'
-      ? `<button class="primary" data-action="pos_done">POS 입력 완료</button>`
-      : status === 'pos_done'
-        ? `<button class="primary" data-action="completed">주문 완료</button>`
-        : `<button class="secondary" data-action="accepted">접수 상태로 복원</button>`;
+  const actions = isActive(order)
+    ? `<button class="primary" data-action="completed">완료 처리</button><button class="secondary" data-action="cancelled">취소 · 숨김</button>`
+    : `<button class="secondary restore-button" data-action="new">대기 목록으로 복원</button>`;
+
   const card = document.createElement('article');
-  card.className = `order-card ${status === 'new' ? 'is-new' : ''}`;
+  card.className = `order-card ${isActive(order) ? 'is-new' : ''}`;
   card.dataset.orderId = order.id;
   card.innerHTML = `
     <div class="order-card-head">
-      <div><div class="order-table">${escapeHtml(order.tableLabel || '테이블 미설정')}</div><div class="order-meta">#${escapeHtml(String(order.id || '').slice(-6).toUpperCase())} · ${formatTime(order)} · ${elapsedText(order)}</div></div>
+      <div>
+        <div class="order-table">${escapeHtml(order.tableLabel || '테이블 미설정')}</div>
+        <div class="order-meta">#${escapeHtml(String(order.id || '').slice(-6).toUpperCase())} · ${formatTime(order)} · ${elapsedText(order)}</div>
+      </div>
       <span class="status-pill status-${status}">${STATUS_LABELS[status] || status}</span>
     </div>
     <div class="order-items">${itemRows || '<div>메뉴 정보 없음</div>'}</div>
     <div class="order-total"><span>${Number(order.itemCount || 0)}개 메뉴</span><strong>${fmt(order.total)}</strong></div>
-    <div class="order-actions">${nextAction}<button class="secondary" data-action="cancelled">취소 처리</button></div>`;
+    <div class="order-actions ${isActive(order) ? '' : 'single-order-action'}">${actions}</div>`;
+
   card.querySelectorAll('[data-action]').forEach(button => {
     button.addEventListener('click', () => updateOrderStatus(order.id, button.dataset.action));
   });
   return card;
 }
 
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
-}
-
 function filteredOrders() {
   return [...orders.values()]
-    .filter(order => currentFilter === 'all' || order.status === currentFilter)
-    .sort((a, b) => (Number(b.createdAt) || Date.parse(b.submittedAtLocal || '') || 0) - (Number(a.createdAt) || Date.parse(a.submittedAtLocal || '') || 0));
+    .filter(order => {
+      if (currentFilter === 'active') return isActive(order);
+      if (currentFilter === 'completed') return order.status === 'completed';
+      return true;
+    })
+    .sort((a, b) => safeOrderTime(b) - safeOrderTime(a));
 }
 
 function updateCounts() {
   const list = [...orders.values()];
-  ['new','accepted','pos_done','completed'].forEach(status => {
-    const target = document.getElementById(`count${status === 'pos_done' ? 'PosDone' : status[0].toUpperCase() + status.slice(1)}`);
-    if (target) target.textContent = list.filter(order => order.status === status).length;
-  });
+  $('#countActive').textContent = list.filter(isActive).length;
+  $('#countCompleted').textContent = list.filter(order => order.status === 'completed').length;
   $('#countAll').textContent = list.length;
 }
 
 function renderAll() {
   updateCounts();
   $('#listTitle').textContent = FILTER_TITLES[currentFilter];
-  document.querySelectorAll('[data-filter]').forEach(button => button.classList.toggle('active', button.dataset.filter === currentFilter));
+  document.querySelectorAll('[data-filter]').forEach(button => {
+    button.classList.toggle('active', button.dataset.filter === currentFilter);
+  });
+
   const list = $('#orderList');
   list.innerHTML = '';
   const visible = filteredOrders();
@@ -198,7 +230,7 @@ function renderAll() {
 }
 
 async function updateOrderStatus(orderId, status) {
-  if (!orderId) return;
+  if (!orderId || !database) return;
   try {
     await update(ref(database, `stores/${STORE_ID}/orders/${orderId}`), {
       status,
@@ -220,14 +252,17 @@ function notifyNewOrder(order) {
       tag: `order-${order.id}`,
       renotify: true
     });
-    notification.onclick = () => { window.focus(); showAlert(order.id); };
+    notification.onclick = () => {
+      window.focus();
+      showAlert(order.id);
+    };
   }
   if (!activeAlertOrderId) showAlert(order.id);
 }
 
 function showAlert(orderId) {
   const order = orders.get(orderId);
-  if (!order) return;
+  if (!order || !isActive(order)) return;
   activeAlertOrderId = orderId;
   pendingAlerts = pendingAlerts.filter(id => id !== orderId);
   $('#alertTable').textContent = order.tableLabel || '테이블 미설정';
@@ -252,10 +287,12 @@ function clearListeners() {
 }
 
 async function loadOrders() {
+  if (!database) return;
   clearListeners();
   const ordersRef = ref(database, `stores/${STORE_ID}/orders`);
-  const recentQuery = query(ordersRef, orderByChild('createdAt'), limitToLast(150));
+  const recentQuery = query(ordersRef, orderByChild('createdAt'), limitToLast(200));
   const initial = await get(recentQuery);
+
   if (initial.exists()) {
     initial.forEach(child => {
       const value = { id: child.key, ...child.val() };
@@ -272,85 +309,60 @@ async function loadOrders() {
     knownOrderIds.add(id);
     orders.set(id, value);
     renderAll();
-    if (isNewArrival && value.status === 'new') notifyNewOrder(value);
+    if (isNewArrival && isActive(value)) notifyNewOrder(value);
   }));
 
   unsubscribeListeners.push(onChildChanged(recentQuery, snapshot => {
-    orders.set(snapshot.key, { id: snapshot.key, ...snapshot.val() });
+    const value = { id: snapshot.key, ...snapshot.val() };
+    orders.set(snapshot.key, value);
+    if (!isActive(value)) pendingAlerts = pendingAlerts.filter(id => id !== snapshot.key);
     renderAll();
   }));
 
   unsubscribeListeners.push(onChildRemoved(recentQuery, snapshot => {
     orders.delete(snapshot.key);
     knownOrderIds.delete(snapshot.key);
+    pendingAlerts = pendingAlerts.filter(id => id !== snapshot.key);
     renderAll();
   }));
 }
 
-async function verifyStaff(user) {
-  const staffSnapshot = await get(ref(database, `staff/${user.uid}`));
-  if (staffSnapshot.val() !== true) {
-    await signOut(auth);
-    throw new Error('이 계정은 직원 권한이 없습니다. Firebase의 staff 목록에 UID를 등록하세요.');
-  }
-}
-
-async function handleSignedIn(user) {
-  try {
-    await verifyStaff(user);
-    showDashboard();
-    await loadOrders();
-  } catch (error) {
-    showLogin(error.message);
-  }
-}
-
 function bindUi() {
   $('#alarmButton').addEventListener('click', enableAlarm);
-  $('#logoutButton').addEventListener('click', () => signOut(auth));
-  $('#refreshButton').addEventListener('click', loadOrders);
+  $('#refreshButton').addEventListener('click', () => loadOrders().catch(console.error));
   document.querySelectorAll('[data-filter]').forEach(button => {
-    button.addEventListener('click', () => { currentFilter = button.dataset.filter; renderAll(); });
+    button.addEventListener('click', () => {
+      currentFilter = button.dataset.filter;
+      renderAll();
+    });
   });
   $('#alertAcknowledge').addEventListener('click', acknowledgeAlert);
-  $('#alertAccept').addEventListener('click', async () => {
-    const id = activeAlertOrderId;
-    if (id) await updateOrderStatus(id, 'accepted');
-  });
-  $('#loginForm').addEventListener('submit', async event => {
-    event.preventDefault();
-    $('#loginError').textContent = '';
-    $('#loginButton').disabled = true;
-    try {
-      await signInWithEmailAndPassword(auth, $('#loginEmail').value.trim(), $('#loginPassword').value);
-    } catch (error) {
-      $('#loginError').textContent = '로그인 정보를 확인해주세요.';
-      console.error(error);
-    } finally {
-      $('#loginButton').disabled = false;
-    }
-  });
 }
 
-function initialize() {
+async function initialize() {
   bindUi();
   updateAlarmButton();
+  renderAll();
+
   if (!isFirebaseConfigured()) {
     $('#setupWarning').classList.remove('hidden');
-    showLogin('Firebase 설정값이 아직 입력되지 않았습니다.');
-    $('#loginButton').disabled = true;
+    setConnection(false);
     return;
   }
 
-  app = initializeApp(FIREBASE_CONFIG);
-  auth = getAuth(app);
-  database = getDatabase(app);
-  onValue(ref(database, '.info/connected'), snapshot => setConnection(snapshot.val() === true));
-  onAuthStateChanged(auth, user => {
-    clearListeners();
-    if (user) handleSignedIn(user);
-    else showLogin();
-  });
+  try {
+    const app = initializeApp(FIREBASE_CONFIG);
+    auth = getAuth(app);
+    database = getDatabase(app);
+    await signInAnonymously(auth);
+    onValue(ref(database, '.info/connected'), snapshot => setConnection(snapshot.val() === true));
+    await loadOrders();
+  } catch (error) {
+    console.error(error);
+    setConnection(false);
+    $('#setupWarning').classList.remove('hidden');
+    $('#setupWarning').innerHTML = `<strong>Firebase 연결에 실패했습니다.</strong><p>${escapeHtml(error.message || '설정을 확인해주세요.')}</p>`;
+  }
 }
 
 initialize();

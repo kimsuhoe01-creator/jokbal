@@ -6,7 +6,6 @@ import {
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 import {
   getDatabase,
-  onValue,
   push,
   ref,
   serverTimestamp,
@@ -18,7 +17,6 @@ import {
   isFirebaseConfigured
 } from './firebase-config.js';
 
-const LAST_ORDER_KEY = 'jokbal_last_submitted_order';
 const TABLE_KEY = 'jokbal_table_label';
 const DEVICE_KEY = 'jokbal_device_id';
 
@@ -104,15 +102,7 @@ async function submitOrder(payload) {
   };
 
   await set(orderRef, order);
-  localStorage.setItem(LAST_ORDER_KEY, orderId);
   return { id: orderId, ...order };
-}
-
-async function listenToOrder(orderId, callback) {
-  if (!configured || !database || !auth || !orderId) return () => {};
-  await waitForAuthUser();
-  const orderRef = ref(database, `stores/${STORE_ID}/orders/${orderId}`);
-  return onValue(orderRef, snapshot => callback(snapshot.exists() ? snapshot.val() : null));
 }
 
 function getTableLabel() {
@@ -127,22 +117,12 @@ function setTableLabel(value) {
   return normalized;
 }
 
-function getLastOrderId() {
-  return localStorage.getItem(LAST_ORDER_KEY) || '';
-}
-
-function clearLastOrderId() {
-  localStorage.removeItem(LAST_ORDER_KEY);
-}
-
 window.JokbalRealtime = {
   isConfigured: () => configured,
   submitOrder,
-  listenToOrder,
   getTableLabel,
   setTableLabel,
-  getLastOrderId,
-  clearLastOrderId
+  clearLastOrderId: () => {}
 };
 
 initialize();

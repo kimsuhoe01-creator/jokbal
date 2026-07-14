@@ -4,13 +4,14 @@
  * 이 설정 값 자체는 비밀번호가 아닙니다. 실제 접근 권한은 database.rules.json으로 제어합니다.
  */
 export const FIREBASE_CONFIG = {
-  apiKey: "PASTE_FIREBASE_API_KEY",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://PASTE_DATABASE_NAME.firebasedatabase.app",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
-  appId: "PASTE_FIREBASE_APP_ID"
+  apiKey: "AIzaSyBJfGWOr4nvn9wjzPHeey2Ba29vd_FMp-U",
+  authDomain: "jokbal-tablet.firebaseapp.com",
+  databaseURL: "https://jokbal-tablet-default-rtdb.firebaseio.com",
+  projectId: "jokbal-tablet",
+  storageBucket: "jokbal-tablet.firebasestorage.app",
+  messagingSenderId: "766915189072",
+  appId: "1:766915189072:web:d260e859f68d82f4803455",
+  measurementId: "G-9ZGHQN9SW6"
 };
 
 export const STORE_ID = "bacninh";
