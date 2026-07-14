@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2b1708" />
+  <title>족발신선생 박닌점 · 주문 접수</title>
+  <meta name="description" content="족발신선생 박닌점 실시간 주문 접수 화면" />
+  <link rel="manifest" href="./counter-manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/counter.css?v=20260714-1" />
+</head>
+<body>
+  <main class="counter-shell">
+    <header class="counter-header">
+      <div>
+        <p class="eyebrow">JOKBAL HOUSE · BẮC NINH</p>
+        <h1>족발신선생 박닌점 <span>실시간 주문 접수</span></h1>
+      </div>
+      <div class="header-actions">
+        <span id="connectionBadge" class="connection-badge offline">● 연결 확인 중</span>
+        <button id="alarmButton" class="alarm-button" type="button">🔔 알림 켜기</button>
+        <button id="logoutButton" class="ghost-button hidden" type="button">로그아웃</button>
+      </div>
+    </header>
+
+    <section id="setupWarning" class="setup-warning hidden">
+      <strong>실시간 주문 연결 설정이 필요합니다.</strong>
+      <p><code>js/firebase-config.js</code>에 Firebase 설정값을 입력한 뒤 다시 배포하세요.</p>
+    </section>
+
+    <section id="loginPanel" class="login-panel">
+      <div class="login-card">
+        <span class="login-icon">🔐</span>
+        <h2>직원 로그인</h2>
+        <p>카운터용 직원 계정으로 로그인하세요.</p>
+        <form id="loginForm">
+          <label>이메일<input id="loginEmail" type="email" autocomplete="username" required /></label>
+          <label>비밀번호<input id="loginPassword" type="password" autocomplete="current-password" required /></label>
+          <button id="loginButton" type="submit">로그인</button>
+          <p id="loginError" class="form-error" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden">
+      <div class="summary-grid">
+        <button type="button" data-filter="new" class="summary-card active"><span>신규</span><strong id="countNew">0</strong></button>
+        <button type="button" data-filter="accepted" class="summary-card"><span>접수</span><strong id="countAccepted">0</strong></button>
+        <button type="button" data-filter="pos_done" class="summary-card"><span>POS 입력</span><strong id="countPosDone">0</strong></button>
+        <button type="button" data-filter="completed" class="summary-card"><span>완료</span><strong id="countCompleted">0</strong></button>
+        <button type="button" data-filter="all" class="summary-card"><span>전체</span><strong id="countAll">0</strong></button>
+      </div>
+
+      <div class="dashboard-toolbar">
+        <div>
+          <h2 id="listTitle">신규 주문</h2>
+          <p>손님 태블릿에서 주문 완료를 누르면 즉시 여기에 표시됩니다.</p>
+        </div>
+        <button id="refreshButton" class="ghost-button" type="button">↻ 새로고침</button>
+      </div>
+
+      <div id="orderList" class="order-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div id="newOrderAlert" class="new-order-alert hidden" role="dialog" aria-modal="true" aria-live="assertive">
+    <div class="alert-card">
+      <div class="alert-bell">🔔</div>
+      <p>새 주문이 도착했습니다</p>
+      <h2 id="alertTable">테이블</h2>
+      <div id="alertSummary" class="alert-summary"></div>
+      <div class="alert-actions">
+        <button id="alertAcknowledge" class="ghost-button" type="button">알림만 확인</button>
+        <button id="alertAccept" class="primary-button" type="button">주문 접수</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/counter.js?v=20260714-1"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(console.error));
+    }
+  </script>
+</body>
+</html>

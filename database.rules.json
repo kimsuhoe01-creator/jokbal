@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "staff": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": false
+      }
+    },
+    "stores": {
+      "$storeId": {
+        "orders": {
+          ".read": "auth != null && root.child('staff').child(auth.uid).val() === true",
+          ".indexOn": ["createdAt", "status"],
+          "$orderId": {
+            ".read": "auth != null && (data.child('customerUid').val() === auth.uid || root.child('staff').child(auth.uid).val() === true)",
+            ".write": "auth != null && ((!data.exists() && newData.child('customerUid').val() === auth.uid && newData.child('storeId').val() === $storeId && newData.child('status').val() === 'new') || root.child('staff').child(auth.uid).val() === true)",
+            ".validate": "newData.hasChildren(['id','storeId','customerUid','deviceId','tableLabel','status','items','total','itemCount','createdAt'])"
+          }
+        }
+      }
+    }
+  }
+}

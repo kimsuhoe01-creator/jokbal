@@ -72,10 +72,10 @@ let categoryTrackingBound = false;
 let categoryFramePending = false;
 const CAT_ICONS = {recommend:'🔥', oven:'♨️', main:'🥩', solo:'👤', side:'🥢', meal:'🍚', drink:'🍺'};
 const UI = {
-  ko:{addCart:'장바구니 담기', cart:'장바구니', viewCart:'장바구니 보기', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문', giftEligible:'🎁 홀 무료 서비스 선택 가능',chooseFreeGift:'홀 무료 서비스 선택 (필수)',freeGiftHelp:'쟁반국수 또는 고르곤졸라피자 중 1개를 골라주세요.',needFreeGift:'홀 무료 서비스 메뉴를 선택해주세요.',giftLabel:'홀 무료 서비스', added:'✓ 장바구니에 담았습니다'},
-  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', viewCart:'Xem giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', giftEligible:'🎁 Có quà miễn phí tại quán',chooseFreeGift:'Chọn quà tại quán (bắt buộc)',freeGiftHelp:'Chọn 1 trong 2: mỳ khay hoặc pizza Gorgonzola.',needFreeGift:'Vui lòng chọn quà miễn phí tại quán.',giftLabel:'Quà tại quán', added:'✓ Đã thêm vào giỏ'},
-  en:{addCart:'Add to cart', cart:'Cart', viewCart:'View cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', giftEligible:'🎁 Free dine-in gift available',chooseFreeGift:'Choose a dine-in gift (required)',freeGiftHelp:'Choose one: noodle platter or Gorgonzola pizza.',needFreeGift:'Please select your free dine-in gift.',giftLabel:'Dine-in gift', added:'✓ Added to cart'},
-  zh:{addCart:'加入购物车', cart:'购物车', viewCart:'查看购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', giftEligible:'🎁 可选择堂食免费赠品',chooseFreeGift:'选择堂食赠品（必选）',freeGiftHelp:'拌面拼盘或戈贡佐拉披萨二选一。',needFreeGift:'请选择堂食免费赠品。',giftLabel:'堂食赠品', added:'✓ 已加入购物车'}
+  ko:{addCart:'장바구니 담기', cart:'장바구니', viewCart:'장바구니 보기', empty:'장바구니가 비어 있습니다.', selectOption:'옵션 선택', selectSize:'사이즈 선택', selectHalf:'반반 메뉴 2가지를 선택해주세요', qty:'수량', cancel:'취소', add:'담기', clear:'비우기', total:'합계', cartNote:'주문 내역을 확인해주세요.', staffNote:'직원이 태블릿을 확인 후 POS에 입력해주세요.', close:'추가주문', size:'사이즈', option:'선택', needHalf:'반반 메뉴는 2가지를 선택해야 합니다.', orderList:'주문 확인', staffConfirm:'직원용', editOrder:'주문 수정', staffTitle:'직원 확인용 주문서', qtyLabel:'수량', addOrder:'추가주문', giftEligible:'🎁 홀 무료 서비스 선택 가능',chooseFreeGift:'홀 무료 서비스 선택 (필수)',freeGiftHelp:'쟁반국수 또는 고르곤졸라피자 중 1개를 골라주세요.',needFreeGift:'홀 무료 서비스 메뉴를 선택해주세요.',giftLabel:'홀 무료 서비스', added:'✓ 장바구니에 담았습니다',continueOrder:'계속 주문',submitOrder:'주문 완료',sendOrder:'주문 완료 · 직원에게 전송',sending:'주문 전송 중...',tableSetup:'테이블 설정',tableLabel:'테이블 번호',tablePlaceholder:'예: T1 / 3번 테이블',save:'저장',orderSent:'주문이 전송되었습니다',waitingStaff:'직원 확인을 기다리고 있습니다.',acceptedOrder:'직원이 주문을 확인했습니다.',posDoneOrder:'POS 입력이 완료되었습니다.',completedOrder:'주문 접수가 완료되었습니다.',cancelledOrder:'주문이 취소 처리되었습니다.',newOrder:'추가 주문 시작',noRealtime:'실시간 주문 연결 설정이 필요합니다.',noTable:'테이블 번호를 먼저 설정해주세요.',sendFailed:'주문 전송에 실패했습니다. 인터넷 연결을 확인해주세요.',confirmSend:'이 주문을 직원에게 전송할까요?',orderNumber:'주문번호',tableSaved:'테이블 번호를 저장했습니다.'},
+  vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', viewCart:'Xem giỏ món', empty:'Giỏ món đang trống.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', giftEligible:'🎁 Có quà miễn phí tại quán',chooseFreeGift:'Chọn quà tại quán (bắt buộc)',freeGiftHelp:'Chọn 1 trong 2: mỳ khay hoặc pizza Gorgonzola.',needFreeGift:'Vui lòng chọn quà miễn phí tại quán.',giftLabel:'Quà tại quán', added:'✓ Đã thêm vào giỏ',continueOrder:'Tiếp tục chọn món',submitOrder:'Hoàn tất gọi món',sendOrder:'Hoàn tất · Gửi cho nhân viên',sending:'Đang gửi đơn...',tableSetup:'Cài đặt bàn',tableLabel:'Số bàn',tablePlaceholder:'VD: T1 / Bàn 3',save:'Lưu',orderSent:'Đã gửi đơn hàng',waitingStaff:'Đang chờ nhân viên xác nhận.',acceptedOrder:'Nhân viên đã xác nhận đơn.',posDoneOrder:'Đã nhập đơn vào POS.',completedOrder:'Đơn hàng đã được tiếp nhận.',cancelledOrder:'Đơn hàng đã bị hủy.',newOrder:'Gọi thêm món',noRealtime:'Cần thiết lập kết nối đơn hàng thời gian thực.',noTable:'Vui lòng thiết lập số bàn trước.',sendFailed:'Không gửi được đơn. Vui lòng kiểm tra Internet.',confirmSend:'Gửi đơn này cho nhân viên?',orderNumber:'Mã đơn',tableSaved:'Đã lưu số bàn.'},
+  en:{addCart:'Add to cart', cart:'Cart', viewCart:'View cart', empty:'Cart is empty.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', giftEligible:'🎁 Free dine-in gift available',chooseFreeGift:'Choose a dine-in gift (required)',freeGiftHelp:'Choose one: noodle platter or Gorgonzola pizza.',needFreeGift:'Please select your free dine-in gift.',giftLabel:'Dine-in gift', added:'✓ Added to cart',continueOrder:'Continue ordering',submitOrder:'Complete order',sendOrder:'Complete · Send to staff',sending:'Sending order...',tableSetup:'Set table',tableLabel:'Table number',tablePlaceholder:'e.g. T1 / Table 3',save:'Save',orderSent:'Order sent',waitingStaff:'Waiting for staff confirmation.',acceptedOrder:'Staff confirmed your order.',posDoneOrder:'The order was entered into POS.',completedOrder:'Your order has been received.',cancelledOrder:'The order was cancelled.',newOrder:'Start another order',noRealtime:'Real-time order connection must be configured.',noTable:'Please set the table number first.',sendFailed:'Could not send the order. Check the internet connection.',confirmSend:'Send this order to staff?',orderNumber:'Order No.',tableSaved:'Table number saved.'},
+  zh:{addCart:'加入购物车', cart:'购物车', viewCart:'查看购物车', empty:'购物车为空。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', giftEligible:'🎁 可选择堂食免费赠品',chooseFreeGift:'选择堂食赠品（必选）',freeGiftHelp:'拌面拼盘或戈贡佐拉披萨二选一。',needFreeGift:'请选择堂食免费赠品。',giftLabel:'堂食赠品', added:'✓ 已加入购物车',continueOrder:'继续点餐',submitOrder:'完成点餐',sendOrder:'完成点餐 · 发送给员工',sending:'正在发送订单...',tableSetup:'设置桌号',tableLabel:'桌号',tablePlaceholder:'例：T1 / 3号桌',save:'保存',orderSent:'订单已发送',waitingStaff:'正在等待员工确认。',acceptedOrder:'员工已确认订单。',posDoneOrder:'订单已录入POS。',completedOrder:'订单已受理。',cancelledOrder:'订单已取消。',newOrder:'继续加单',noRealtime:'需要设置实时订单连接。',noTable:'请先设置桌号。',sendFailed:'订单发送失败，请检查网络连接。',confirmSend:'要把此订单发送给员工吗？',orderNumber:'订单号',tableSaved:'桌号已保存。'}
 };const SIZE_LABELS = {
   single:{ko:'단품',vi:'Một phần',en:'Single',zh:'单品'}, s:{ko:'소',vi:'Nhỏ',en:'S',zh:'小'}, m:{ko:'중',vi:'Vừa',en:'M',zh:'中'}, l:{ko:'대',vi:'Lớn',en:'L',zh:'大'},
   tiger:{ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường',en:'Regular soju',zh:'普通烧酒'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang',en:'Sunyang line',zh:'鲜洋系列'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt',en:'Choose soft drink',zh:'选择饮料'}
@@ -114,7 +114,7 @@ function applyText(){
   document.title = `${t('storeName')} · ${t('heroTitle')}`;
   requestAnimationFrame(updateStickyMetrics);
 }
-function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); }
+function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); syncTableBadge(); restoreLastOrderStatus(); }
 function showLang(){ $('#app').classList.add('hidden'); $('#langScreen').classList.remove('hidden'); }
 
 document.querySelectorAll('[data-lang]').forEach(btn => btn.addEventListener('click', () => { lang = btn.dataset.lang; localStorage.setItem('jokbal_lang', lang); showApp(); }));
@@ -295,6 +295,7 @@ function initCartUI(){
   if(document.getElementById('cartFab')) return;
   document.body.insertAdjacentHTML('beforeend', `
     <button id="cartFab" class="cart-fab" type="button"><span class="cart-summary">🧾 <span class="cart-title">${ui('cart')}</span> <b id="cartCount">0</b></span><span class="cart-view-label">${ui('viewCart')} ›</span></button>
+    <button id="tableBadge" class="table-badge" type="button" title="${ui('tableSetup')}">🪑 <span id="tableBadgeText">${ui('tableSetup')}</span></button>
     <div id="cartToast" class="cart-toast hidden">${ui('added')}</div>
     <div id="orderSheet" class="sheet hidden" role="dialog" aria-modal="true">
       <div class="sheet-card order-card">
@@ -310,11 +311,11 @@ function initCartUI(){
     </div>
     <div id="cartSheet" class="sheet hidden" role="dialog" aria-modal="true">
       <div class="sheet-card cart-card">
-        <div class="sheet-head"><strong>🧾 ${ui('orderList')}</strong><div class="head-actions"><button id="staffConfirm" class="staff-mini" type="button">${ui('staffConfirm')}</button><button id="cartClose" type="button">×</button></div></div>
+        <div class="sheet-head"><strong>🧾 ${ui('orderList')}</strong><button id="cartClose" type="button">×</button></div>
         <div class="staff-note">${ui('cartNote')}</div>
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-total"><span>${ui('total')}</span><strong id="cartTotal">0₫</strong></div>
-        <div class="sheet-actions cart-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="primary">➕ ${ui('addOrder')}</button></div>
+        <div class="sheet-actions cart-actions realtime-cart-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="ghost">${ui('continueOrder')}</button><button id="cartSubmit" type="button" class="primary order-submit">✅ ${ui('sendOrder')}</button></div>
       </div>
     </div>
     <div id="staffSheet" class="sheet hidden" role="dialog" aria-modal="true">
@@ -325,14 +326,34 @@ function initCartUI(){
         <div class="cart-total"><span>${ui('total')}</span><strong id="staffTotal">0₫</strong></div>
         <div class="sheet-actions"><button id="staffBack" type="button" class="ghost">${ui('editOrder')}</button><button id="staffDone" type="button" class="primary">${ui('addOrder')}</button></div>
       </div>
+    </div>
+    <div id="tableSheet" class="sheet hidden" role="dialog" aria-modal="true">
+      <div class="sheet-card table-card">
+        <div class="sheet-head"><strong>🪑 ${ui('tableSetup')}</strong><button id="tableClose" type="button">×</button></div>
+        <label class="table-label" for="tableInput">${ui('tableLabel')}</label>
+        <input id="tableInput" class="table-input" type="text" maxlength="30" placeholder="${ui('tablePlaceholder')}" autocomplete="off">
+        <div class="sheet-actions"><button id="tableCancel" type="button" class="ghost">${ui('cancel')}</button><button id="tableSave" type="button" class="primary">${ui('save')}</button></div>
+      </div>
+    </div>
+    <div id="orderStatusSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-live="polite">
+      <div class="sheet-card status-card">
+        <button id="statusClose" class="status-close" type="button">×</button>
+        <div id="statusIcon" class="status-icon">✅</div>
+        <h2 id="statusTitle">${ui('orderSent')}</h2>
+        <p id="statusMessage">${ui('waitingStaff')}</p>
+        <div class="status-meta"><span id="statusTable"></span><span id="statusOrderNumber"></span></div>
+        <div class="sheet-actions"><button id="statusContinue" type="button" class="primary">${ui('newOrder')}</button></div>
+      </div>
     </div>`);
   const cartFabEl = document.getElementById('cartFab');
+  const tableBadgeEl = document.getElementById('tableBadge');
   const topbar = document.querySelector('.topbar');
   const topActions = document.querySelector('.top-actions');
-  if (cartFabEl && topbar && topActions) {
-    topbar.insertBefore(cartFabEl, topActions);
-  }
+  const brandWrap = document.querySelector('.brand-wrap');
+  if (tableBadgeEl && brandWrap) brandWrap.appendChild(tableBadgeEl);
+  if (cartFabEl && topbar && topActions) topbar.insertBefore(cartFabEl, topActions);
   $('#cartFab').onclick = openCart;
+  $('#tableBadge').onclick = openTableSetup;
   $('#orderClose').onclick = closeOrderSheet;
   $('#orderCancel').onclick = closeOrderSheet;
   $('#orderSheet').addEventListener('click', e => { if(e.target.id === 'orderSheet') closeOrderSheet(); });
@@ -341,16 +362,24 @@ function initCartUI(){
   $('#orderAdd').onclick = addPendingToCart;
   $('#cartClose').onclick = closeCart;
   $('#cartDone').onclick = closeCart;
+  $('#cartSubmit').onclick = submitCartOrder;
   $('#cartSheet').addEventListener('click', e => { if(e.target.id === 'cartSheet') closeCart(); });
   $('#cartClear').onclick = () => { cart = []; renderCart(); updateCartButton(); };
-  $('#staffConfirm').onclick = openStaffConfirm;
   $('#staffClose').onclick = closeStaffConfirm;
   $('#staffBack').onclick = () => { closeStaffConfirm(); openCart(); };
   $('#staffDone').onclick = () => { closeStaffConfirm(); closeCart(); };
   $('#staffSheet').addEventListener('click', e => { if(e.target.id === 'staffSheet') closeStaffConfirm(); });
+  $('#tableClose').onclick = closeTableSetup;
+  $('#tableCancel').onclick = closeTableSetup;
+  $('#tableSave').onclick = saveTableSetup;
+  $('#tableInput').addEventListener('keydown', e => { if(e.key === 'Enter') saveTableSetup(); });
+  $('#tableSheet').addEventListener('click', e => { if(e.target.id === 'tableSheet') closeTableSetup(); });
+  $('#statusClose').onclick = closeOrderStatus;
+  $('#statusContinue').onclick = closeOrderStatus;
+  syncTableBadge();
 }
 function refreshCartLanguage(){
-  ['cartFab','cartToast','orderSheet','cartSheet','staffSheet'].forEach(id => document.getElementById(id)?.remove());
+  ['cartFab','tableBadge','cartToast','orderSheet','cartSheet','staffSheet','tableSheet','orderStatusSheet'].forEach(id => document.getElementById(id)?.remove());
   initCartUI();
   renderCart();
   updateCartButton();
@@ -477,7 +506,7 @@ function addPendingToCart(){
   else cart.push({key, n:pendingItem.n, size, price, qty:pendingQty, options});
   closeOrderSheet(); renderCart(); updateCartButton(); showCartToast();
 }
-function openCart(){ initCartUI(); renderCart(); $('#cartSheet').classList.remove('hidden'); }
+function openCart(){ initCartUI(); renderCart(); $('#cartSheet').classList.remove('hidden'); document.getElementById('cartSubmit')?.toggleAttribute('disabled', cart.length === 0); }
 function closeCart(){ $('#cartSheet')?.classList.add('hidden'); }
 function showCartToast(){
   const toast = $('#cartToast');
@@ -503,7 +532,7 @@ function updateCartButton(){
 }
 function renderCart(){
   const box = $('#cartItems'); if(!box) return;
-  if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#cartTotal').textContent = fmt(0); return; }
+  if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#cartTotal').textContent = fmt(0); document.getElementById('cartSubmit')?.setAttribute('disabled',''); return; }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
     const optionLines = it.options?.length ? `<div class="cart-option-list">${it.options.map(o => `<div class="${o?.kind === 'hallGift' ? 'gift-option-line' : ''}">- ${cartOptionLabel(o)}</div>`).join('')}</div>` : '';
@@ -515,7 +544,157 @@ function renderCart(){
     box.appendChild(row);
   });
   $('#cartTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
+  document.getElementById('cartSubmit')?.removeAttribute('disabled');
 }
+
+let currentOrderUnsubscribe = null;
+let currentOrderId = '';
+let statusRestoreStarted = false;
+
+function realtimeApi(){ return window.JokbalRealtime || null; }
+function syncTableBadge(){
+  const badge = document.getElementById('tableBadgeText');
+  if(!badge) return;
+  const table = realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
+  badge.textContent = table || ui('tableSetup');
+  document.getElementById('tableBadge')?.classList.toggle('configured', Boolean(table));
+}
+function openTableSetup(){
+  initCartUI();
+  const input = document.getElementById('tableInput');
+  input.value = realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
+  document.getElementById('tableSheet').classList.remove('hidden');
+  setTimeout(() => input.focus(), 80);
+}
+function closeTableSetup(){ document.getElementById('tableSheet')?.classList.add('hidden'); }
+function saveTableSetup(){
+  const value = document.getElementById('tableInput')?.value?.trim() || '';
+  if(!value){ alert(ui('noTable')); return; }
+  if(realtimeApi()?.setTableLabel) realtimeApi().setTableLabel(value);
+  else localStorage.setItem('jokbal_table_label', value);
+  syncTableBadge();
+  closeTableSetup();
+  showCartToastMessage(ui('tableSaved'));
+}
+function showCartToastMessage(message){
+  initCartUI();
+  const toast = document.getElementById('cartToast');
+  if(!toast) return;
+  toast.textContent = message;
+  toast.classList.remove('hidden');
+  clearTimeout(showCartToastMessage.timer);
+  showCartToastMessage.timer = setTimeout(() => toast.classList.add('hidden'), 1400);
+}
+function serializeOptions(options){
+  return (options || []).map(option => ({
+    id: option?.id || '',
+    kind: option?.kind || '',
+    ko: option?.ko || '',
+    vi: option?.vi || '',
+    en: option?.en || '',
+    zh: option?.zh || '',
+    price: Number(option?.price || 0)
+  }));
+}
+function buildOrderPayload(tableLabel){
+  const items = cart.map(item => ({
+    key: item.key,
+    nameKo: item.n?.ko || '',
+    nameVi: item.n?.vi || '',
+    nameEn: item.n?.en || '',
+    nameZh: item.n?.zh || '',
+    size: item.size || 'single',
+    sizeKo: SIZE_LABELS[item.size]?.ko || item.size || '',
+    sizeVi: SIZE_LABELS[item.size]?.vi || item.size || '',
+    unitPrice: Number(item.price || 0),
+    qty: Number(item.qty || 0),
+    lineTotal: Number(item.price || 0) * Number(item.qty || 0),
+    options: serializeOptions(item.options)
+  }));
+  return {
+    tableLabel,
+    orderType: 'dine_in',
+    language: lang || 'ko',
+    items,
+    itemCount: items.reduce((sum,item) => sum + item.qty, 0),
+    total: items.reduce((sum,item) => sum + item.lineTotal, 0)
+  };
+}
+async function submitCartOrder(){
+  if(!cart.length) return;
+  const api = realtimeApi();
+  if(!api?.isConfigured?.()){
+    alert(ui('noRealtime'));
+    return;
+  }
+  let tableLabel = api.getTableLabel?.() || '';
+  if(!tableLabel){ openTableSetup(); return; }
+  if(!confirm(ui('confirmSend'))) return;
+  const button = document.getElementById('cartSubmit');
+  const oldText = button?.textContent || '';
+  if(button){ button.disabled = true; button.textContent = ui('sending'); }
+  try{
+    const order = await api.submitOrder(buildOrderPayload(tableLabel));
+    cart = [];
+    renderCart();
+    updateCartButton();
+    closeCart();
+    showOrderStatus(order);
+  }catch(error){
+    console.error(error);
+    alert(error?.message === 'FIREBASE_NOT_CONFIGURED' ? ui('noRealtime') : ui('sendFailed'));
+  }finally{
+    if(button){ button.disabled = cart.length === 0; button.textContent = oldText || `✅ ${ui('sendOrder')}`; }
+  }
+}
+function orderStatusCopy(status){
+  if(status === 'accepted') return {icon:'👩‍🍳', title:ui('orderSent'), message:ui('acceptedOrder')};
+  if(status === 'pos_done') return {icon:'🧾', title:ui('orderSent'), message:ui('posDoneOrder')};
+  if(status === 'completed') return {icon:'✅', title:ui('completedOrder'), message:ui('completedOrder')};
+  if(status === 'cancelled') return {icon:'⚠️', title:ui('cancelledOrder'), message:ui('cancelledOrder')};
+  return {icon:'📨', title:ui('orderSent'), message:ui('waitingStaff')};
+}
+function renderOrderStatus(order){
+  if(!order) return;
+  initCartUI();
+  const copy = orderStatusCopy(order.status);
+  document.getElementById('statusIcon').textContent = copy.icon;
+  document.getElementById('statusTitle').textContent = copy.title;
+  document.getElementById('statusMessage').textContent = copy.message;
+  document.getElementById('statusTable').textContent = `🪑 ${order.tableLabel || realtimeApi()?.getTableLabel?.() || ''}`;
+  document.getElementById('statusOrderNumber').textContent = `${ui('orderNumber')} #${String(order.id || currentOrderId).slice(-6).toUpperCase()}`;
+  document.getElementById('orderStatusSheet').classList.remove('hidden');
+}
+function showOrderStatus(order){
+  currentOrderId = order?.id || '';
+  renderOrderStatus(order);
+  if(currentOrderUnsubscribe){ currentOrderUnsubscribe(); currentOrderUnsubscribe = null; }
+  if(currentOrderId && realtimeApi()?.listenToOrder){
+    Promise.resolve(realtimeApi().listenToOrder(currentOrderId, liveOrder => {
+      if(liveOrder) renderOrderStatus({id:currentOrderId, ...liveOrder});
+    })).then(unsubscribe => { currentOrderUnsubscribe = unsubscribe; }).catch(console.error);
+  }
+}
+function closeOrderStatus(){ document.getElementById('orderStatusSheet')?.classList.add('hidden'); }
+function restoreLastOrderStatus(){
+  if(statusRestoreStarted) return;
+  const api = realtimeApi();
+  if(!api?.isConfigured?.()) return;
+  const lastId = api.getLastOrderId?.();
+  if(!lastId) return;
+  statusRestoreStarted = true;
+  currentOrderId = lastId;
+  Promise.resolve(api.listenToOrder(lastId, order => {
+    if(!order) return;
+    if(['new','accepted','pos_done'].includes(order.status)) renderOrderStatus({id:lastId, ...order});
+  })).then(unsubscribe => { currentOrderUnsubscribe = unsubscribe; }).catch(error => {
+    statusRestoreStarted = false;
+    console.error(error);
+  });
+}
+window.addEventListener('jokbal:realtime-ready', () => { syncTableBadge(); restoreLastOrderStatus(); });
+window.addEventListener('jokbal:table-changed', syncTableBadge);
+
 function openStaffConfirm(){
   initCartUI();
   renderStaffConfirm();
