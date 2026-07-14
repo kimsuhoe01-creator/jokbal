@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jokbal-order-pwa-v4-landscape';
+const CACHE_NAME = 'jokbal-order-pwa-v5-final';
 const CORE_FILES = [
   './',
   './index.html',
