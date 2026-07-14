@@ -1,8 +1,9 @@
 {
+  "id": "./",
   "name": "족발신선생 박닌점",
   "short_name": "족발신선생",
   "description": "족발신선생 박닌점 태블릿 주문 메뉴",
-  "lang": "ko",
+  "lang": "ko-KR",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -11,32 +12,20 @@
     "minimal-ui"
   ],
   "orientation": "landscape",
-  "background_color": "#f7f0e6",
-  "theme_color": "#2b1708",
+  "background_color": "#f8f4ed",
+  "theme_color": "#2b1407",
   "icons": [
     {
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/maskable-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "./icons/maskable-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
