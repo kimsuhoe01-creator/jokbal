@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jokbal-local-staff-view-v11';
+const CACHE_NAME = 'jokbal-local-staff-view-v13';
 const CORE_FILES = [
   './',
   './index.html',
