@@ -52,8 +52,8 @@ const MENU = [
   {cat:'meal', img:'images/bone-soup.jpg', n:{ko:'뼈 해장국',vi:'Canh xương hầm',en:'Pork-Bone Soup',zh:'骨头汤'}, alt:{ko:'매일 매장에서 직접 끓입니다',vi:'Hầm trực tiếp tại quán mỗi ngày',en:'Simmered in-house daily',zh:'每日店内现熬'}, prices:[['single',tax8(180000)]]},
   {cat:'meal', img:'images/budae.jpg', spicy:true, n:{ko:'부대찌개',vi:'Canh quân đội',en:'Budae Jjigae',zh:'部队火锅'}, prices:[['single',tax8(300000)]]},
   {cat:'meal', img:'images/kodari-naengmyeon.jpg', n:{ko:'코다리냉면',vi:'Miến lạnh trộn khô cá minh thái',en:'Kodari Cold Noodles',zh:'明太鱼干拌冷面'}, prices:[['single',tax8(180000)]]},
-  {cat:'meal', img:'images/water-naengmyeon.jpg', n:{ko:'물냉면',vi:'Miến lạnh nước',en:'Cold Noodles in Broth',zh:'水冷面'}, prices:[['single',tax8(150000)]], options:[{id:'basic',ko:'기본',vi:'Món cơ bản',en:'Basic',zh:'基本',price:tax8(150000)},{id:'bulgogi200',ko:'직화불고기 200g 추가',vi:'Thêm thịt heo nướng lửa 200g',en:'Add fire-grilled pork 200g',zh:'加直火烤猪肉200g',price:tax8(210000)},{id:'oven-bossam-addon',ko:'화덕보쌈 추가',vi:'Thêm ba chỉ đút lò',en:'Add oven bossam',zh:'加烤炉五花肉',price:tax8(210000)}]},
-  {cat:'meal', img:'images/spicy-naengmyeon.jpg', spicy:true, n:{ko:'비빔냉면',vi:'Miến lạnh trộn',en:'Spicy Mixed Cold Noodles',zh:'拌冷面'}, prices:[['single',tax8(150000)]], options:[{id:'basic',ko:'기본',vi:'Món cơ bản',en:'Basic',zh:'基本',price:tax8(150000)},{id:'bulgogi200',ko:'직화불고기 200g 추가',vi:'Thêm thịt heo nướng lửa 200g',en:'Add fire-grilled pork 200g',zh:'加直火烤猪肉200g',price:tax8(210000)},{id:'oven-bossam-addon',ko:'화덕보쌈 추가',vi:'Thêm ba chỉ đút lò',en:'Add oven bossam',zh:'加烤炉五花肉',price:tax8(210000)}]},
+  {cat:'meal', img:'images/water-naengmyeon.jpg', n:{ko:'물냉면',vi:'Miến lạnh nước',en:'Cold Noodles in Broth',zh:'水冷面'}, prices:[['single',tax8(150000)]], options:[{id:'basic',ko:'기본',vi:'Món cơ bản',en:'Basic',zh:'基本',price:tax8(150000)},{id:'bulgogi200',ko:'직화불고기 200g 추가',vi:'Thêm thịt heo nướng lửa 200g',en:'Add fire-grilled pork 200g',zh:'加直火烤猪肉200g',addPrice:tax8(60000),price:tax8(150000)+tax8(60000)},{id:'oven-bossam-addon',ko:'화덕보쌈 추가',vi:'Thêm ba chỉ đút lò',en:'Add oven bossam',zh:'加烤炉五花肉',addPrice:tax8(60000),price:tax8(150000)+tax8(60000)}]},
+  {cat:'meal', img:'images/spicy-naengmyeon.jpg', spicy:true, n:{ko:'비빔냉면',vi:'Miến lạnh trộn',en:'Spicy Mixed Cold Noodles',zh:'拌冷面'}, prices:[['single',tax8(150000)]], options:[{id:'basic',ko:'기본',vi:'Món cơ bản',en:'Basic',zh:'基本',price:tax8(150000)},{id:'bulgogi200',ko:'직화불고기 200g 추가',vi:'Thêm thịt heo nướng lửa 200g',en:'Add fire-grilled pork 200g',zh:'加直火烤猪肉200g',addPrice:tax8(60000),price:tax8(150000)+tax8(60000)},{id:'oven-bossam-addon',ko:'화덕보쌈 추가',vi:'Thêm ba chỉ đút lò',en:'Add oven bossam',zh:'加烤炉五花肉',addPrice:tax8(60000),price:tax8(150000)+tax8(60000)}]},
 
   {cat:'drink', img:'images/beer.jpg', n:{ko:'타이거 병맥주',vi:'Bia',en:'Beer',zh:'啤酒'}, prices:[['tiger',tax10(50000)]], options:[{id:'tiger',ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger',price:tax10(50000)}]},
   {cat:'drink', img:'images/soju.jpg', n:{ko:'소주',vi:'Soju',en:'Soju',zh:'韩国烧酒'}, prices:[['soju_std',tax10(140000)],['soju_sunyang',220000]], options:[{id:'chamisul',ko:'참이슬',vi:'Chamisul',en:'Chamisul',zh:'Chamisul',price:tax10(140000)},{id:'jinro',ko:'진로',vi:'Jinro',en:'Jinro',zh:'Jinro',price:tax10(140000)},{id:'chumchurum',ko:'처음처럼',vi:'Chum Churum',en:'Chum Churum',zh:'Chum Churum',price:tax10(140000)},{id:'saero',ko:'새로',vi:'Saero',en:'Saero',zh:'Saero',price:tax10(140000)},{id:'sunyang',ko:'선양',vi:'Sunyang',en:'Sunyang',zh:'Sunyang',price:220000},{id:'sunyang-oak',ko:'선양 오크',vi:'Sunyang Oak',en:'Sunyang Oak',zh:'Sunyang Oak',price:220000}]},
@@ -76,7 +76,14 @@ const UI = {
   vi:{addCart:'Thêm vào giỏ', cart:'Giỏ món', viewCart:'Xem giỏ món', empty:'Giỏ món đang trống.',selectTable:'Vui lòng chọn bàn.', selectOption:'Chọn tùy chọn', selectSize:'Chọn size', selectHalf:'Chọn 2 món cho set 2 món', qty:'Số lượng', cancel:'Hủy', add:'Thêm', clear:'Xóa', total:'Tổng cộng', cartNote:'Vui lòng kiểm tra món đã chọn.', staffNote:'Nhân viên kiểm tra giỏ món rồi nhập vào POS.', close:'Gọi thêm', size:'Size', option:'Lựa chọn', needHalf:'Set 2 món cần chọn đủ 2 món.', orderList:'Xác nhận món', staffConfirm:'Nhân viên', editOrder:'Sửa đơn', staffTitle:'Phiếu gọi món cho nhân viên', qtyLabel:'Số lượng', addOrder:'Gọi thêm', giftEligible:'🎁 Có quà miễn phí tại quán',chooseFreeGift:'Chọn quà tại quán (bắt buộc)',freeGiftHelp:'Chọn 1 trong 2: mỳ khay hoặc pizza Gorgonzola.',needFreeGift:'Vui lòng chọn quà miễn phí tại quán.',giftLabel:'Quà tại quán', added:'✓ Đã thêm vào giỏ',continueOrder:'Tiếp tục chọn món',submitOrder:'Hoàn tất gọi món',sendOrder:'Hoàn tất · Gửi cho nhân viên',sending:'Đang gửi đơn...',tableSetup:'Cài đặt bàn',tableLabel:'Số bàn',tablePlaceholder:'VD: T1 / Bàn 3',save:'Lưu',orderSent:'Đã hoàn tất gọi món.',waitingStaff:'Vui lòng chờ nhân viên.',acceptedOrder:'Đã hoàn tất gọi món.',posDoneOrder:'Đã hoàn tất gọi món.',completedOrder:'Đã hoàn tất gọi món.',cancelledOrder:'Đơn hàng đã bị hủy.',newOrder:'Gọi thêm món',noRealtime:'Cần thiết lập kết nối đơn hàng thời gian thực.',noTable:'Vui lòng thiết lập số bàn trước.',sendFailed:'Không gửi được đơn. Vui lòng kiểm tra Internet.',confirmSend:'Gửi đơn này cho nhân viên?',orderNumber:'Mã đơn',tableSaved:'Đã lưu số bàn.'},
   en:{addCart:'Add to cart', cart:'Cart', viewCart:'View cart', empty:'Cart is empty.',selectTable:'Please select your table.', selectOption:'Choose options', selectSize:'Choose size', selectHalf:'Choose 2 items for Half & Half', qty:'Qty', cancel:'Cancel', add:'Add', clear:'Clear', total:'Total', cartNote:'Please check your selected items.', staffNote:'Staff checks this cart and enters it into POS.', close:'Order more', size:'Size', option:'Option', needHalf:'Please choose 2 items.', orderList:'Order list', staffConfirm:'Staff', editOrder:'Edit order', staffTitle:'Staff order sheet', qtyLabel:'Qty', addOrder:'Order more', giftEligible:'🎁 Free dine-in gift available',chooseFreeGift:'Choose a dine-in gift (required)',freeGiftHelp:'Choose one: noodle platter or Gorgonzola pizza.',needFreeGift:'Please select your free dine-in gift.',giftLabel:'Dine-in gift', added:'✓ Added to cart',continueOrder:'Continue ordering',submitOrder:'Complete order',sendOrder:'Complete · Send to staff',sending:'Sending order...',tableSetup:'Set table',tableLabel:'Table number',tablePlaceholder:'e.g. T1 / Table 3',save:'Save',orderSent:'Order completed.',waitingStaff:'Please wait for a staff member.',acceptedOrder:'Order completed.',posDoneOrder:'Order completed.',completedOrder:'Order completed.',cancelledOrder:'The order was cancelled.',newOrder:'Start another order',noRealtime:'Real-time order connection must be configured.',noTable:'Please set the table number first.',sendFailed:'Could not send the order. Check the internet connection.',confirmSend:'Send this order to staff?',orderNumber:'Order No.',tableSaved:'Table number saved.'},
   zh:{addCart:'加入购物车', cart:'购物车', viewCart:'查看购物车', empty:'购物车为空。',selectTable:'请选择桌号。', selectOption:'选择选项', selectSize:'选择规格', selectHalf:'请选择双拼的2种', qty:'数量', cancel:'取消', add:'加入', clear:'清空', total:'合计', cartNote:'请确认已选菜单。', staffNote:'员工确认购物车后输入POS。', close:'继续点餐', size:'规格', option:'选择', needHalf:'双拼需要选择2种。', orderList:'确认菜单', staffConfirm:'员工', editOrder:'修改订单', staffTitle:'员工确认订单', qtyLabel:'数量', addOrder:'继续点餐', giftEligible:'🎁 可选择堂食免费赠品',chooseFreeGift:'选择堂食赠品（必选）',freeGiftHelp:'拌面拼盘或戈贡佐拉披萨二选一。',needFreeGift:'请选择堂食免费赠品。',giftLabel:'堂食赠品', added:'✓ 已加入购物车',continueOrder:'继续点餐',submitOrder:'完成点餐',sendOrder:'完成点餐 · 发送给员工',sending:'正在发送订单...',tableSetup:'设置桌号',tableLabel:'桌号',tablePlaceholder:'例：T1 / 3号桌',save:'保存',orderSent:'点餐已完成。',waitingStaff:'请等待工作人员。',acceptedOrder:'点餐已完成。',posDoneOrder:'点餐已完成。',completedOrder:'点餐已完成。',cancelledOrder:'订单已取消。',newOrder:'继续加单',noRealtime:'需要设置实时订单连接。',noTable:'请先设置桌号。',sendFailed:'订单发送失败，请检查网络连接。',confirmSend:'要把此订单发送给员工吗？',orderNumber:'订单号',tableSaved:'桌号已保存。'}
-};const SIZE_LABELS = {
+};
+const OPTION_PRICE_TEXT = {
+  ko:{price:'가격 · VAT 포함',base:'기본 가격 · VAT 포함',add:'추가금 · VAT 포함',total:'선택 후 총액'},
+  vi:{price:'Giá · đã gồm VAT',base:'Giá cơ bản · đã gồm VAT',add:'Phụ thu · đã gồm VAT',total:'Tổng sau khi chọn'},
+  en:{price:'Price · VAT included',base:'Base price · VAT included',add:'Add-on · VAT included',total:'Total after selection'},
+  zh:{price:'价格 · 含增值税',base:'基础价格 · 含增值税',add:'加价 · 含增值税',total:'选择后总价'}
+};
+const SIZE_LABELS = {
   single:{ko:'단품',vi:'Một phần',en:'Single',zh:'单品'}, s:{ko:'소',vi:'Nhỏ',en:'S',zh:'小'}, m:{ko:'중',vi:'Vừa',en:'M',zh:'中'}, l:{ko:'대',vi:'Lớn',en:'L',zh:'大'},
   tiger:{ko:'Tiger',vi:'Tiger',en:'Tiger',zh:'Tiger'}, soju_std:{ko:'일반 소주',vi:'Soju thường',en:'Regular soju',zh:'普通烧酒'}, soju_sunyang:{ko:'선양류',vi:'Dòng Sunyang',en:'Sunyang line',zh:'鲜洋系列'}, soft_all:{ko:'음료 선택',vi:'Chọn nước ngọt',en:'Choose soft drink',zh:'选择饮料'}
 };const HALF_CHOICES = [
@@ -302,7 +309,7 @@ function initCartUI(){
         <div id="orderName" class="order-name"></div>
         <div id="sizeChooser" class="chooser"></div>
         <div id="halfChooser" class="half-chooser"></div>
-        <div id="optionChooser" class="half-chooser"></div>
+        <div id="optionChooser" class="option-chooser"></div>
         <div id="hallGiftChooser" class="gift-chooser"></div>
         <div class="qty-row"><span>${ui('qty')}</span><div><button id="qtyMinus" type="button">−</button><b id="qtyNum">1</b><button id="qtyPlus" type="button">＋</button></div></div>
         <div class="sheet-actions"><button id="orderCancel" type="button" class="ghost">${ui('cancel')}</button><button id="orderAdd" type="button" class="primary">${ui('add')}</button></div>
@@ -359,11 +366,24 @@ function localName(o){ return o?.[lang] || o?.en || o?.vi || o?.ko || ''; }
 function viName(o){ return o?.vi || o?.ko || o?.en || ''; }
 function sizeLocal(size){ return SIZE_LABELS[size]?.[lang] || SIZE_LABELS[size]?.en || SIZE_LABELS[size]?.ko || size; }
 function sizeVi(size){ return SIZE_LABELS[size]?.vi || SIZE_LABELS[size]?.ko || size; }
+function optionPriceText(key){ return OPTION_PRICE_TEXT[lang]?.[key] || OPTION_PRICE_TEXT.ko[key] || key; }
+function optionPriceMarkup(item, option){
+  const totalPrice = Number(option?.price || item?.prices?.[0]?.[1] || 0);
+  const addPrice = Number(option?.addPrice || 0);
+  if(addPrice > 0){
+    return `<span class="option-price-block"><strong class="option-add-price">+${fmt(addPrice)}</strong><small>${optionPriceText('add')}</small><em>${optionPriceText('total')} ${fmt(totalPrice)}</em></span>`;
+  }
+  const note = option?.id === 'basic' ? optionPriceText('base') : optionPriceText('price');
+  return `<span class="option-price-block"><strong>${fmt(totalPrice)}</strong><small>${note}</small></span>`;
+}
 function cartOptionLabel(option){
-  return option?.kind === 'hallGift' ? `🎁 ${ui('giftLabel')}: ${localName(option)}` : localName(option);
+  const suffix = Number(option?.addPrice || 0) > 0 ? ` (+${fmt(option.addPrice)})` : '';
+  const name = `${localName(option)}${suffix}`;
+  return option?.kind === 'hallGift' ? `🎁 ${ui('giftLabel')}: ${name}` : name;
 }
 function staffOptionVi(option){
-  const name = viName(option);
+  const suffix = Number(option?.addPrice || 0) > 0 ? ` (+${fmt(option.addPrice)})` : '';
+  const name = `${viName(option)}${suffix}`;
   return option?.kind === 'hallGift' ? `🎁 Quà tại quán: ${name}` : name;
 }
 function openOrderSheet(item){
@@ -390,11 +410,16 @@ function addDirectToCart(item){
 function closeOrderSheet(){ $('#orderSheet')?.classList.add('hidden'); }
 function renderSizeChooser(item){
   const box = $('#sizeChooser');
-  if(item.options || !item.prices || item.prices.length <= 1){ box.innerHTML = ''; return; }
+  if(item.options || !item.prices || item.prices.length <= 1){ box.innerHTML = ''; box.removeAttribute('data-count'); return; }
+  box.dataset.count = String(item.prices.length);
   box.innerHTML = `<div class="choose-title">${ui('selectSize')}</div>`;
   item.prices.forEach(([size, price], idx) => {
-    const b = document.createElement('button'); b.type='button'; b.className = idx===pendingSizeIndex ? 'selected' : '';
-    b.innerHTML = `<span>${sizeLocal(size)}</span><strong>${fmt(price)}</strong>`;
+    const selected = idx === pendingSizeIndex;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = selected ? 'selected' : '';
+    b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    b.innerHTML = `<span class="size-choice-name">${sizeLocal(size)}</span><strong>${fmt(price)}</strong>`;
     b.onclick = () => { pendingSizeIndex = idx; renderSizeChooser(item); };
     box.appendChild(b);
   });
@@ -402,12 +427,17 @@ function renderSizeChooser(item){
 function renderHalfChooser(item){
   const box = $('#halfChooser'); box.innerHTML = '';
   if(item.cat !== 'recommend') return;
-  box.innerHTML = `<div class="choose-title">${ui('selectHalf')}</div>`;
+  box.innerHTML = `<div class="choose-title choose-title-row"><span>${ui('selectHalf')}</span><b class="choice-progress">${pendingHalf.length}/2</b></div>`;
   HALF_CHOICES.forEach(choice => {
-    const b = document.createElement('button'); b.type='button'; b.className = pendingHalf.includes(choice.id) ? 'selected' : '';
-    b.textContent = localName(choice);
+    const selectedIndex = pendingHalf.indexOf(choice.id);
+    const selected = selectedIndex >= 0;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = selected ? 'selected' : '';
+    b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    b.innerHTML = `<span class="half-choice-number">${selected ? selectedIndex + 1 : ''}</span><strong>${localName(choice)}</strong>`;
     b.onclick = () => {
-      if(pendingHalf.includes(choice.id)) pendingHalf = pendingHalf.filter(x => x !== choice.id);
+      if(selected) pendingHalf = pendingHalf.filter(x => x !== choice.id);
       else { if(pendingHalf.length >= 2) pendingHalf.shift(); pendingHalf.push(choice.id); }
       renderHalfChooser(item);
     };
@@ -419,15 +449,19 @@ function renderOptionChooser(item){
   let box = document.getElementById('optionChooser');
   if(!box){
     const hc = document.getElementById('halfChooser');
-    hc.insertAdjacentHTML('afterend','<div id="optionChooser" class="half-chooser"></div>');
+    hc.insertAdjacentHTML('afterend','<div id="optionChooser" class="option-chooser"></div>');
     box = document.getElementById('optionChooser');
   }
   box.innerHTML = '';
   if(!item.options || item.cat === 'recommend') return;
   box.innerHTML = `<div class="choose-title">${ui('option')}</div>`;
   item.options.forEach((opt, idx) => {
-    const b = document.createElement('button'); b.type='button'; b.className = idx===pendingOptionIndex ? 'selected' : '';
-    b.innerHTML = `<span>${localName(opt)}</span><strong>${fmt(opt.price)}</strong>`;
+    const selected = idx === pendingOptionIndex;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = selected ? 'selected' : '';
+    b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    b.innerHTML = `<span class="option-choice-name">${localName(opt)}</span>${optionPriceMarkup(item, opt)}`;
     b.onclick = () => { pendingOptionIndex = idx; renderOptionChooser(item); };
     box.appendChild(b);
   });
