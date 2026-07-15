@@ -2,15 +2,9 @@ const CACHE_NAME = 'jokbal-order-pwa-v8-firebase-linked';
 const CORE_FILES = [
   './',
   './index.html',
-  './counter.html',
   './css/style.css',
-  './css/counter.css',
   './js/app.js',
-  './js/order-client.js',
-  './js/counter.js',
-  './js/firebase-config.js',
   './manifest.webmanifest',
-  './counter-manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];

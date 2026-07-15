@@ -114,7 +114,7 @@ function applyText(){
   document.title = `${t('storeName')} · ${t('heroTitle')}`;
   requestAnimationFrame(updateStickyMetrics);
 }
-function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); syncTableBadge(); setTimeout(ensureTableSelected, 250); }
+function showApp(){ $('#langScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); applyText(); renderCats(); renderMenu(); initCartUI(); updateCartButton(); }
 function showLang(){ $('#app').classList.add('hidden'); $('#langScreen').classList.remove('hidden'); }
 
 document.querySelectorAll('[data-lang]').forEach(btn => btn.addEventListener('click', () => { lang = btn.dataset.lang; localStorage.setItem('jokbal_lang', lang); showApp(); }));
@@ -398,7 +398,9 @@ function refreshCartLanguage(){
   updateCartButton();
 }
 function localName(o){ return o?.[lang] || o?.en || o?.vi || o?.ko || ''; }
-function koViName(o){ return `${o?.ko || ''} / ${o?.vi || ''}`; }
+function koViName(o){ return `${o?.ko || ''} / ${o?.vi || ''};` }
+function viName(o){ return o?.vi || o?.ko || ''; }
+function sizeVi(size){ return SIZE_LABELS[size]?.vi || SIZE_LABELS[size]?.ko || size; } / ${o?.vi || ''}`; }
 function sizeLocal(size){ return SIZE_LABELS[size]?.[lang] || SIZE_LABELS[size]?.en || SIZE_LABELS[size]?.ko || size; }
 function sizeKoVi(size){ return SIZE_LABELS[size] ? `${SIZE_LABELS[size].ko} / ${SIZE_LABELS[size].vi}` : size; }
 function cartOptionLabel(option){
@@ -547,6 +549,8 @@ function updateCartButton(){
   if(completeCount) completeCount.textContent = count;
   fab?.classList.toggle('has-items', count > 0);
   completeButton?.classList.toggle('has-items', count > 0);
+  const completeButton = document.getElementById(\'completeOrderButton\');
+  if(completeButton){ completeButton.disabled = (count === 0); }
 }
 function renderCart(){
   const box = $('#cartItems'); if(!box) return;
@@ -581,11 +585,6 @@ function syncTableBadge(){
     button.classList.toggle('selected', button.dataset.tableLabel === table);
     button.setAttribute('aria-pressed', button.dataset.tableLabel === table ? 'true' : 'false');
   });
-}
-function ensureTableSelected(){
-  if(currentTableLabel()) return;
-  if(document.getElementById('app')?.classList.contains('hidden')) return;
-  openTableSetup();
 }
 function openTableSetup(){
   initCartUI();
@@ -653,55 +652,10 @@ function buildOrderPayload(tableLabel){
     total: items.reduce((sum,item) => sum + item.lineTotal, 0)
   };
 }
-function handleTopCompleteOrder(){
-  if(!cart.length){
-    openCart();
-    showCartToastMessage(ui('empty'));
-    return;
-  }
+function handleTopCompleteOrder(){ if(!cart.length){ openCart(); showCartToastMessage(ui('empty')); return;} openStaffConfirm(); }
   submitCartOrder();
 }
-async function submitCartOrder(){
-  if(!cart.length){
-    openCart();
-    showCartToastMessage(ui('empty'));
-    return;
-  }
-  const api = realtimeApi();
-  if(!api?.isConfigured?.()){
-    alert(ui('noRealtime'));
-    return;
-  }
-  const tableLabel = currentTableLabel();
-  if(!tableLabel){
-    pendingSubmitAfterTableSelection = true;
-    openTableSetup();
-    return;
-  }
-  if(!confirm(ui('confirmSend'))) return;
-  const cartButton = document.getElementById('cartSubmit');
-  const topButton = document.getElementById('completeOrderButton');
-  const oldCartText = cartButton?.textContent || '';
-  const oldTopHtml = topButton?.innerHTML || '';
-  if(cartButton){ cartButton.disabled = true; cartButton.textContent = ui('sending'); }
-  if(topButton){ topButton.disabled = true; topButton.innerHTML = `<span class="complete-order-label">⏳ ${ui('sending')}</span>`; }
-  try{
-    const order = await api.submitOrder(buildOrderPayload(tableLabel));
-    cart = [];
-    renderCart();
-    updateCartButton();
-    closeCart();
-    api.clearLastOrderId?.();
-    showOrderStatus(order);
-  }catch(error){
-    console.error(error);
-    alert(error?.message === 'FIREBASE_NOT_CONFIGURED' ? ui('noRealtime') : ui('sendFailed'));
-  }finally{
-    if(cartButton){ cartButton.disabled = cart.length === 0; cartButton.textContent = oldCartText || `✅ ${ui('sendOrder')}`; }
-    if(topButton){ topButton.disabled = false; topButton.innerHTML = oldTopHtml || `<span class="complete-order-label">✅ ${t('completeOrder')}</span><b id="completeOrderCount">0</b>`; }
-    updateCartButton();
-  }
-}
+async function submitCartOrder(){ /* disabled */ return; }
 function showOrderStatus(order){
   initCartUI();
   document.getElementById('statusIcon').textContent = '✅';
@@ -715,7 +669,7 @@ function closeOrderStatus(){ document.getElementById('orderStatusSheet')?.classL
 window.addEventListener('jokbal:realtime-ready', () => { syncTableBadge(); });
 window.addEventListener('jokbal:table-changed', syncTableBadge);
 
-function openStaffConfirm(){
+function openStaffConfirm(){ if(!cart.length){ openCart(); showCartToastMessage(ui('empty')); return;} 
   initCartUI();
   renderStaffConfirm();
   closeCart();
@@ -724,13 +678,13 @@ function openStaffConfirm(){
 function closeStaffConfirm(){ $('#staffSheet')?.classList.add('hidden'); }
 function renderStaffConfirm(){
   const box = $('#staffItems'); if(!box) return;
-  if(!cart.length){ box.innerHTML = `<div class="cart-empty">${ui('empty')}</div>`; $('#staffTotal').textContent = fmt(0); return; }
+  if(!cart.length){ box.innerHTML = `<div class="cart-empty">Giỏ món đang trống.</div>`; $('#staffTotal').textContent = fmt(0); return; }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
-    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div class="${o?.kind === 'hallGift' ? 'staff-gift-option-line' : ''}">- ${staffOptionLabel(o)}</div>`).join('')}</div>` : '';
-    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">사이즈 / Size: ${sizeKoVi(it.size)}</div>` : '';
+    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div>- ${o?.vi || o?.ko || ''}</div>`).join('')}</div>` : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">Size: ${sizeVi(it.size)}</div>` : '';
     const row = document.createElement('div'); row.className = 'staff-item';
-    row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${koViName(it.n)}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">수량<b>${it.qty}</b></div>`;
+    row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${viName(it.n)}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">Số lượng<b>${it.qty}</b></div>`;
     box.appendChild(row);
   });
   $('#staffTotal').textContent = fmt(cart.reduce((s,i)=>s+i.price*i.qty,0));
