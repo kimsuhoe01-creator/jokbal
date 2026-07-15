@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jokbal-order-pwa-v8-firebase-linked';
+const CACHE_NAME = 'jokbal-local-staff-view-v10';
 const CORE_FILES = [
   './',
   './index.html',
@@ -42,10 +42,7 @@ async function networkFirst(request) {
   } catch (error) {
     const cached = await caches.match(request);
     if (cached) return cached;
-    if (request.mode === 'navigate') {
-      const url = new URL(request.url);
-      return caches.match(url.pathname.endsWith('counter.html') ? './counter.html' : './index.html');
-    }
+    if (request.mode === 'navigate') return caches.match('./index.html');
     throw error;
   }
 }
@@ -64,9 +61,7 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(cached => {
       const network = fetch(event.request)
         .then(response => {
-          if (response.ok) {
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
-          }
+          if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
           return response;
         })
         .catch(() => cached);

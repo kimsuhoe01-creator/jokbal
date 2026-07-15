@@ -295,7 +295,6 @@ function initCartUI(){
   if(document.getElementById('cartFab')) return;
   document.body.insertAdjacentHTML('beforeend', `
     <button id="cartFab" class="cart-fab" type="button"><span class="cart-summary">🧾 <span class="cart-title">${ui('cart')}</span> <b id="cartCount">0</b></span><span class="cart-view-label">${ui('viewCart')} ›</span></button>
-    <button id="tableBadge" class="table-badge" type="button" title="${ui('tableSetup')}">🪑 <span id="tableBadgeText">${ui('tableSetup')}</span></button>
     <div id="cartToast" class="cart-toast hidden">${ui('added')}</div>
     <div id="orderSheet" class="sheet hidden" role="dialog" aria-modal="true">
       <div class="sheet-card order-card">
@@ -315,55 +314,23 @@ function initCartUI(){
         <div class="staff-note">${ui('cartNote')}</div>
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-total"><span>${ui('total')}</span><strong id="cartTotal">0₫</strong></div>
-        <div class="sheet-actions cart-actions realtime-cart-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="ghost">${ui('continueOrder')}</button><button id="cartSubmit" type="button" class="primary order-submit">✅ ${ui('sendOrder')}</button></div>
+        <div class="sheet-actions cart-actions staff-view-cart-actions"><button id="cartClear" type="button" class="ghost">${ui('clear')}</button><button id="cartDone" type="button" class="ghost">${ui('continueOrder')}</button><button id="cartSubmit" type="button" class="primary order-submit">👨‍🍳 직원 보기 · Tiếng Việt</button></div>
       </div>
     </div>
-    <div id="staffSheet" class="sheet hidden" role="dialog" aria-modal="true">
+    <div id="staffSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="staffSheetTitle">
       <div class="sheet-card staff-card">
-        <div class="sheet-head"><strong>✅ ${ui('staffTitle')}</strong><button id="staffClose" type="button">×</button></div>
-        <div class="staff-note">${ui('staffNote')}</div>
+        <div class="sheet-head"><strong id="staffSheetTitle">👨‍🍳 Phiếu gọi món cho nhân viên</strong><button id="staffClose" type="button" aria-label="Đóng">×</button></div>
+        <div class="staff-note">Nhân viên kiểm tra món khách đã chọn rồi nhập vào POS.</div>
         <div id="staffItems" class="staff-items"></div>
-        <div class="cart-total"><span>${ui('total')}</span><strong id="staffTotal">0₫</strong></div>
-        <div class="sheet-actions"><button id="staffBack" type="button" class="ghost">${ui('editOrder')}</button><button id="staffDone" type="button" class="primary">${ui('addOrder')}</button></div>
-      </div>
-    </div>
-    <div id="tableSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="tableSheetTitle">
-      <div class="sheet-card table-card">
-        <div class="sheet-head"><strong id="tableSheetTitle">🪑 ${ui('tableSetup')}</strong><button id="tableClose" type="button">×</button></div>
-        <p class="table-guide">${ui('selectTable')}</p>
-        <div class="table-zone-list">
-          <section class="table-zone"><h3>1</h3><div class="table-choice-grid">
-            ${['1-1','1-2','1-3','1-4','1-5','1-6','1-7'].map(label => `<button type="button" data-table-label="${label}">${label}</button>`).join('')}
-          </div></section>
-          <section class="table-zone"><h3>2</h3><div class="table-choice-grid">
-            ${['2-8','2-9','2-10','2-11','2-12'].map(label => `<button type="button" data-table-label="${label}">${label}</button>`).join('')}
-          </div></section>
-          <section class="table-zone"><h3>3</h3><div class="table-choice-grid single-table-row">
-            <button type="button" data-table-label="3-13">3-13</button>
-          </div></section>
-        </div>
-        <div class="sheet-actions table-sheet-actions"><button id="tableCancel" type="button" class="ghost">${ui('cancel')}</button></div>
-      </div>
-    </div>
-    <div id="orderStatusSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-live="polite">
-      <div class="sheet-card status-card">
-        <button id="statusClose" class="status-close" type="button">×</button>
-        <div id="statusIcon" class="status-icon">✅</div>
-        <h2 id="statusTitle">${ui('orderSent')}</h2>
-        <p id="statusMessage">${ui('waitingStaff')}</p>
-        <div class="status-meta"><span id="statusTable"></span><span id="statusOrderNumber"></span></div>
-        <div class="sheet-actions"><button id="statusContinue" type="button" class="primary">${ui('newOrder')}</button></div>
+        <div class="cart-total"><span>Tổng cộng</span><strong id="staffTotal">0₫</strong></div>
+        <div class="sheet-actions"><button id="staffBack" type="button" class="ghost">Sửa món</button><button id="staffDone" type="button" class="primary">Đóng</button></div>
       </div>
     </div>`);
   const cartFabEl = document.getElementById('cartFab');
-  const tableBadgeEl = document.getElementById('tableBadge');
   const topbar = document.querySelector('.topbar');
   const topActions = document.querySelector('.top-actions');
-  const brandWrap = document.querySelector('.brand-wrap');
-  if (tableBadgeEl && brandWrap) brandWrap.appendChild(tableBadgeEl);
-  if (cartFabEl && topbar && topActions) topbar.insertBefore(cartFabEl, topActions);
+  if(cartFabEl && topbar && topActions) topbar.insertBefore(cartFabEl, topActions);
   $('#cartFab').onclick = openCart;
-  $('#tableBadge').onclick = openTableSetup;
   const completeOrderButton = document.getElementById('completeOrderButton');
   if(completeOrderButton) completeOrderButton.onclick = handleTopCompleteOrder;
   $('#orderClose').onclick = closeOrderSheet;
@@ -374,40 +341,30 @@ function initCartUI(){
   $('#orderAdd').onclick = addPendingToCart;
   $('#cartClose').onclick = closeCart;
   $('#cartDone').onclick = closeCart;
-  $('#cartSubmit').onclick = submitCartOrder;
+  $('#cartSubmit').onclick = openStaffConfirm;
   $('#cartSheet').addEventListener('click', e => { if(e.target.id === 'cartSheet') closeCart(); });
   $('#cartClear').onclick = () => { cart = []; renderCart(); updateCartButton(); };
   $('#staffClose').onclick = closeStaffConfirm;
   $('#staffBack').onclick = () => { closeStaffConfirm(); openCart(); };
   $('#staffDone').onclick = () => { closeStaffConfirm(); closeCart(); };
   $('#staffSheet').addEventListener('click', e => { if(e.target.id === 'staffSheet') closeStaffConfirm(); });
-  $('#tableClose').onclick = closeTableSetup;
-  $('#tableCancel').onclick = closeTableSetup;
-  document.querySelectorAll('#tableSheet [data-table-label]').forEach(button => {
-    button.onclick = () => saveTableSetup(button.dataset.tableLabel || '');
-  });
-  $('#tableSheet').addEventListener('click', e => { if(e.target.id === 'tableSheet') closeTableSetup(); });
-  $('#statusClose').onclick = closeOrderStatus;
-  $('#statusContinue').onclick = closeOrderStatus;
-  syncTableBadge();
 }
 function refreshCartLanguage(){
-  ['cartFab','tableBadge','cartToast','orderSheet','cartSheet','staffSheet','tableSheet','orderStatusSheet'].forEach(id => document.getElementById(id)?.remove());
+  ['cartFab','cartToast','orderSheet','cartSheet','staffSheet'].forEach(id => document.getElementById(id)?.remove());
   initCartUI();
   renderCart();
   updateCartButton();
 }
 function localName(o){ return o?.[lang] || o?.en || o?.vi || o?.ko || ''; }
-function koViName(o){ return `${o?.ko || ''} / ${o?.vi || ''};` }
-function viName(o){ return o?.vi || o?.ko || ''; }
-function sizeVi(size){ return SIZE_LABELS[size]?.vi || SIZE_LABELS[size]?.ko || size; } / ${o?.vi || ''}`; }
+function viName(o){ return o?.vi || o?.ko || o?.en || ''; }
 function sizeLocal(size){ return SIZE_LABELS[size]?.[lang] || SIZE_LABELS[size]?.en || SIZE_LABELS[size]?.ko || size; }
-function sizeKoVi(size){ return SIZE_LABELS[size] ? `${SIZE_LABELS[size].ko} / ${SIZE_LABELS[size].vi}` : size; }
+function sizeVi(size){ return SIZE_LABELS[size]?.vi || SIZE_LABELS[size]?.ko || size; }
 function cartOptionLabel(option){
   return option?.kind === 'hallGift' ? `🎁 ${ui('giftLabel')}: ${localName(option)}` : localName(option);
 }
-function staffOptionLabel(option){
-  return option?.kind === 'hallGift' ? `🎁 홀 무료 서비스 / Quà tại quán: ${koViName(option)}` : koViName(option);
+function staffOptionVi(option){
+  const name = viName(option);
+  return option?.kind === 'hallGift' ? `🎁 Quà tại quán: ${name}` : name;
 }
 function openOrderSheet(item){
   initCartUI();
@@ -549,8 +506,6 @@ function updateCartButton(){
   if(completeCount) completeCount.textContent = count;
   fab?.classList.toggle('has-items', count > 0);
   completeButton?.classList.toggle('has-items', count > 0);
-  const completeButton = document.getElementById(\'completeOrderButton\');
-  if(completeButton){ completeButton.disabled = (count === 0); }
 }
 function renderCart(){
   const box = $('#cartItems'); if(!box) return;
@@ -569,45 +524,6 @@ function renderCart(){
   document.getElementById('cartSubmit')?.removeAttribute('disabled');
 }
 
-let pendingSubmitAfterTableSelection = false;
-
-function realtimeApi(){ return window.JokbalRealtime || null; }
-function currentTableLabel(){
-  return realtimeApi()?.getTableLabel?.() || localStorage.getItem('jokbal_table_label') || '';
-}
-function syncTableBadge(){
-  const badge = document.getElementById('tableBadgeText');
-  if(!badge) return;
-  const table = currentTableLabel();
-  badge.textContent = table || ui('tableSetup');
-  document.getElementById('tableBadge')?.classList.toggle('configured', Boolean(table));
-  document.querySelectorAll('#tableSheet [data-table-label]').forEach(button => {
-    button.classList.toggle('selected', button.dataset.tableLabel === table);
-    button.setAttribute('aria-pressed', button.dataset.tableLabel === table ? 'true' : 'false');
-  });
-}
-function openTableSetup(){
-  initCartUI();
-  syncTableBadge();
-  document.getElementById('tableSheet')?.classList.remove('hidden');
-}
-function closeTableSetup(){
-  document.getElementById('tableSheet')?.classList.add('hidden');
-  if(!currentTableLabel()) pendingSubmitAfterTableSelection = false;
-}
-function saveTableSetup(value){
-  const normalized = String(value || '').trim();
-  if(!normalized){ alert(ui('noTable')); return; }
-  if(realtimeApi()?.setTableLabel) realtimeApi().setTableLabel(normalized);
-  else localStorage.setItem('jokbal_table_label', normalized);
-  syncTableBadge();
-  document.getElementById('tableSheet')?.classList.add('hidden');
-  showCartToastMessage(`${ui('tableSaved')} (${normalized})`);
-  if(pendingSubmitAfterTableSelection){
-    pendingSubmitAfterTableSelection = false;
-    setTimeout(submitCartOrder, 180);
-  }
-}
 function showCartToastMessage(message){
   initCartUI();
   const toast = document.getElementById('cartToast');
@@ -617,59 +533,20 @@ function showCartToastMessage(message){
   clearTimeout(showCartToastMessage.timer);
   showCartToastMessage.timer = setTimeout(() => toast.classList.add('hidden'), 1600);
 }
-function serializeOptions(options){
-  return (options || []).map(option => ({
-    id: option?.id || '',
-    kind: option?.kind || '',
-    ko: option?.ko || '',
-    vi: option?.vi || '',
-    en: option?.en || '',
-    zh: option?.zh || '',
-    price: Number(option?.price || 0)
-  }));
+function handleTopCompleteOrder(){
+  if(!cart.length){
+    openCart();
+    showCartToastMessage(ui('empty'));
+    return;
+  }
+  openStaffConfirm();
 }
-function buildOrderPayload(tableLabel){
-  const items = cart.map(item => ({
-    key: item.key,
-    nameKo: item.n?.ko || '',
-    nameVi: item.n?.vi || '',
-    nameEn: item.n?.en || '',
-    nameZh: item.n?.zh || '',
-    size: item.size || 'single',
-    sizeKo: SIZE_LABELS[item.size]?.ko || item.size || '',
-    sizeVi: SIZE_LABELS[item.size]?.vi || item.size || '',
-    unitPrice: Number(item.price || 0),
-    qty: Number(item.qty || 0),
-    lineTotal: Number(item.price || 0) * Number(item.qty || 0),
-    options: serializeOptions(item.options)
-  }));
-  return {
-    tableLabel,
-    orderType: 'dine_in',
-    language: lang || 'ko',
-    items,
-    itemCount: items.reduce((sum,item) => sum + item.qty, 0),
-    total: items.reduce((sum,item) => sum + item.lineTotal, 0)
-  };
-}
-function handleTopCompleteOrder(){ if(!cart.length){ openCart(); showCartToastMessage(ui('empty')); return;} openStaffConfirm(); }
-  submitCartOrder();
-}
-async function submitCartOrder(){ /* disabled */ return; }
-function showOrderStatus(order){
-  initCartUI();
-  document.getElementById('statusIcon').textContent = '✅';
-  document.getElementById('statusTitle').textContent = ui('orderSent');
-  document.getElementById('statusMessage').textContent = ui('waitingStaff');
-  document.getElementById('statusTable').textContent = `🪑 ${order?.tableLabel || currentTableLabel()}`;
-  document.getElementById('statusOrderNumber').textContent = `${ui('orderNumber')} #${String(order?.id || '').slice(-6).toUpperCase()}`;
-  document.getElementById('orderStatusSheet').classList.remove('hidden');
-}
-function closeOrderStatus(){ document.getElementById('orderStatusSheet')?.classList.add('hidden'); }
-window.addEventListener('jokbal:realtime-ready', () => { syncTableBadge(); });
-window.addEventListener('jokbal:table-changed', syncTableBadge);
-
-function openStaffConfirm(){ if(!cart.length){ openCart(); showCartToastMessage(ui('empty')); return;} 
+function openStaffConfirm(){
+  if(!cart.length){
+    openCart();
+    showCartToastMessage(ui('empty'));
+    return;
+  }
   initCartUI();
   renderStaffConfirm();
   closeCart();
@@ -677,13 +554,21 @@ function openStaffConfirm(){ if(!cart.length){ openCart(); showCartToastMessage(
 }
 function closeStaffConfirm(){ $('#staffSheet')?.classList.add('hidden'); }
 function renderStaffConfirm(){
-  const box = $('#staffItems'); if(!box) return;
-  if(!cart.length){ box.innerHTML = `<div class="cart-empty">Giỏ món đang trống.</div>`; $('#staffTotal').textContent = fmt(0); return; }
+  const box = $('#staffItems');
+  if(!box) return;
+  if(!cart.length){
+    box.innerHTML = '<div class="cart-empty">Giỏ món đang trống.</div>';
+    $('#staffTotal').textContent = fmt(0);
+    return;
+  }
   box.innerHTML = '';
   cart.forEach((it, idx) => {
-    const optionLines = it.options?.length ? `<div class="staff-options">${it.options.map(o => `<div>- ${o?.vi || o?.ko || ''}</div>`).join('')}</div>` : '';
-    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">Size: ${sizeVi(it.size)}</div>` : '';
-    const row = document.createElement('div'); row.className = 'staff-item';
+    const optionLines = it.options?.length
+      ? `<div class="staff-options">${it.options.map(o => `<div class="${o?.kind === 'hallGift' ? 'staff-gift-option-line' : ''}">- ${staffOptionVi(o)}</div>`).join('')}</div>`
+      : '';
+    const sizeLine = it.size && it.size !== 'single' ? `<div class="staff-size">Kích cỡ: ${sizeVi(it.size)}</div>` : '';
+    const row = document.createElement('div');
+    row.className = 'staff-item';
     row.innerHTML = `<div class="staff-no">${idx+1}</div><div class="staff-main"><strong>${viName(it.n)}</strong>${optionLines}${sizeLine}<div class="staff-price">${fmt(it.price)} × ${it.qty} = ${fmt(it.price * it.qty)}</div></div><div class="staff-qty">Số lượng<b>${it.qty}</b></div>`;
     box.appendChild(row);
   });
